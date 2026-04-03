@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio — Full Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0f;
@@ -25,7 +25,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Sarabun', 'Space Mono', sans-serif;
+    font-family: 'Noto Sans Thai', 'Space Mono', sans-serif;
     overflow-x: hidden;
     line-height: 1.75;
     font-weight: 400;
@@ -212,6 +212,43 @@
   }
   .btn-view-detail:hover { background: rgba(0,255,136,0.1); border-color: var(--accent); transform: translateY(-1px); }
 
+
+  /* ===== IMAGE SLIDER ===== */
+  .project-slider { position: relative; }
+  .slider-track { width: 100%; height: 100%; position: relative; }
+  .slide {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    opacity: 0; transition: opacity 0.45s ease;
+    display: block;
+  }
+  .slide.active { opacity: 1; }
+  .slider-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 10; width: 32px; height: 32px;
+    background: rgba(10,10,15,0.75); border: 1px solid rgba(255,255,255,0.15);
+    color: #fff; font-size: 1.1rem; line-height: 1;
+    border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; backdrop-filter: blur(6px);
+    opacity: 0;
+  }
+  .project-slider:hover .slider-btn { opacity: 1; }
+  .slider-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+  .slider-prev { left: 10px; }
+  .slider-next { right: 10px; }
+  .slider-dots {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 5px; z-index: 10;
+  }
+  .slider-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(0,0,0,0.25); cursor: pointer;
+    transition: all 0.2s; border: none; padding: 0;
+  }
+  .slider-dot.active { background: #111; transform: scale(1.3); }
+
   /* ABOUT */
   #about { padding: 6rem 4rem; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -355,6 +392,11 @@
     footer { padding: 1.5rem; flex-direction: column; text-align: center; }
     .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
     #pricing { padding: 4rem 1.5rem; }
+
+    /* Mobile: ลดความสูง preview ไม่ให้ซูมเกิน */
+    .project-preview { height: 200px !important; }
+    .project-card.featured .project-preview { height: 200px !important; }
+    .project-preview img { object-position: top center; }
   }
   @media (max-width: 480px) {
     .hero-btns { flex-direction: column; }
@@ -389,7 +431,6 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" id="mobileClose">✕</button>
   <a href="#about" onclick="closeMobile()">About</a>
   <a href="#skills" onclick="closeMobile()">Skills</a>
   <a href="#projects" onclick="closeMobile()">Projects</a>
@@ -402,10 +443,10 @@
   <div class="hero-bg"></div>
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
-    <div class="hero-badge">🟢 รับงาน Freelance — Available Now</div>
+    <div class="hero-badge">🟢 Available Now</div>
     <h1 class="hero-name">Hi, I'm Aum<span class="accent-line">Full Stack Dev</span></h1>
-    <p class="hero-role">// Web App · Google Apps Script · Automation</p>
-    <p class="hero-desc">รับสร้าง <strong style="color:var(--text)">Web Application</strong> และ <strong style="color:var(--text)">Automation</strong> ด้วย Google Apps Script ให้ธุรกิจ SME และร้านค้า ทำงานง่ายขึ้น ลด manual ได้จริง</p>
+    <p class="hero-role">// Full Stack Solutions · Business Systems · Custom Development</p>
+    <p class="hero-desc">รับออกแบบและพัฒนาซอฟต์แวร์ครบวงจร <strong style="color:var(--text)">Web Application</strong> และ <strong style="color:var(--text)">Automation</strong> เพื่อลดขั้นตอนการทำงานที่ซับซ้อน เปลี่ยนงาน Manual ให้เป็นระบบอัตโนมัติที่แม่นยำและช่วยขับเคลื่อนธุรกิจของคุณให้ไปได้ไกลกว่าเดิม</p>
     <div class="hero-trust-badges">
       <div class="trust-badge"><span class="trust-icon">✓</span> ทำตาม Requirement</div>
       <div class="trust-badge"><span class="trust-icon">✓</span> ส่งตรงเวลา</div>
@@ -424,10 +465,9 @@
     <div class="code-block">
       <div><span class="line-num">01</span><span class="cm">// tech stack</span></div>
       <div><span class="line-num">02</span><span class="kw">const</span> stack = {</div>
-      <div><span class="line-num">03</span>&nbsp;&nbsp;frontend: <span class="str">"React, HTML/CSS/JS"</span>,</div>
-      <div><span class="line-num">04</span>&nbsp;&nbsp;backend: <span class="str">"Node.js, GAS"</span>,</div>
-      <div><span class="line-num">05</span>&nbsp;&nbsp;data: <span class="str">"Google Sheets API"</span>,</div>
-      <div><span class="line-num">06</span>&nbsp;&nbsp;deploy: <span class="str">"Vercel, GCP"</span></div>
+      <div><span class="line-num">03</span>&nbsp;&nbsp;frontend: <span class="str">"React, Next.js, Tailwind, HTML/CSS/JS"</span>,</div>
+      <div><span class="line-num">04</span>&nbsp;&nbsp;backend: <span class="str">"Node.js, GAS, Express"</span>,</div>
+      <div><span class="line-num">05</span>&nbsp;&nbsp;database: <span class="str">"Firebase, Supabase"</span>,</div>
       <div><span class="line-num">07</span>};</div>
       <div><span class="line-num">08</span><span class="fn">buildSolution</span>(stack);</div>
     </div>
@@ -442,9 +482,9 @@
       <h2 class="section-title">ทำไมต้องเลือก<br><span style="color:var(--accent)">ผม?</span></h2>
       <div class="section-divider"></div>
       <div class="about-text">
-        <p>ผมเป็น <strong>Full Stack Developer</strong> ที่เชี่ยวชาญการสร้าง Web Application และ Automation ด้วย <strong>Google Apps Script</strong> มีประสบการณ์ทำงานกับธุรกิจหลากหลายประเภท ตั้งแต่ SME จนถึง Enterprise</p>
-        <p>ผมเน้นส่งมอบงานที่ <strong>ใช้งานได้จริง</strong> ตรงตาม requirement ของลูกค้า และส่งงานตรงเวลา พร้อม support หลังส่งงาน</p>
-        <p>ทุกโปรเจกต์ผมออกแบบให้รองรับ <strong>Responsive Design</strong> ทำงานได้ดีทั้งบนมือถือและคอมพิวเตอร์</p>
+        <p>ผมเป็น <strong>Full Stack Developer</strong> ที่เน้นการสร้าง <strong>Digital Solutions</strong> เพื่อแก้ปัญหาธุรกิจโดยเฉพาะ ไม่ว่าจะเป็นการสร้างภาพลักษณ์ผ่าน Landing Page การพัฒนา Web Application ซับซ้อน หรือการทำระบบ Automation เพื่อเพิ่มประสิทธิภาพให้ธุรกิจ</p>
+        <p>ผมให้ความสำคัญกับโครงสร้างที่ <strong>รองรับการเติบโต (Scalability)</strong> และโค้ดที่เป็นระเบียบ เพื่อให้ระบบของคุณพร้อมใช้งานในระยะยาวและขยายตัวได้ตามธุรกิจในอนาคต</p>
+        <p>ด้วยประสบการณ์ทำงานร่วมกับธุรกิจตั้งแต่ระดับ <strong>SME จนถึง Enterprise</strong> ผมจึงเข้าใจหัวใจของระบบที่ต้อง รวดเร็ว แม่นยำ และใช้งานได้ดีจริงบนทุกอุปกรณ์</p>
       </div>
     </div>
     <div class="about-services reveal reveal-delay-2">
@@ -497,7 +537,6 @@
       <button class="filter-tab active" onclick="filterProjects('all', this)">All</button>
       <button class="filter-tab" onclick="filterProjects('webapp', this)">Web App</button>
       <button class="filter-tab" onclick="filterProjects('liff', this)">LINE LIFF</button>
-      <button class="filter-tab" onclick="filterProjects('hr', this)">HR System</button>
     </div>
   </div>
 
@@ -505,16 +544,17 @@
 
     <!-- PROJECT 1: StockFlow Pro -->
     <div class="project-card featured reveal" data-type="webapp">
-      <div class="project-preview" style="background:#0a0f0a;padding:0;overflow:hidden;">
-        <div class="project-preview-inner" style="padding:0;align-items:flex-start;">
-          <!-- 🖼️ เปลี่ยน src เป็นชื่อไฟล์รูปของคุณ เช่น images/stockflow.jpg -->
-          <img
-            src="images/stockflow.jpg"
-            alt="StockFlow Pro — ระบบจัดการคลังสินค้า"
-            style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease;"
-            onmouseover="this.style.transform='scale(1.03)'"
-            onmouseout="this.style.transform='scale(1)'">
+      <div class="project-preview project-slider" style="background:#0a0f0a;">
+        <div class="slider-track">
+          <!-- 🖼️ เพิ่ม/ลด <img class="slide"> ได้เลย ใส่ active ที่รูปแรก -->
+          <img class="slide active" src="images/stockflow-1.jpg" alt="StockFlow Pro screenshot 1">
+          <img class="slide" src="images/stockflow-2.jpg" alt="StockFlow Pro screenshot 2">
+          <img class="slide" src="images/stockflow-3.jpg" alt="StockFlow Pro screenshot 3">
+          <img class="slide" src="images/stockflow-4.jpg" alt="StockFlow Pro screenshot 4">
         </div>
+        <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
+        <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
+        <div class="slider-dots"></div>
         <span class="float-badge tl">📦 FEATURED</span>
         <span class="float-badge br">Firebase + PWA</span>
       </div>
@@ -523,32 +563,29 @@
           <span class="project-type">Web App</span>
           <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">Tailwind CSS</span><span class="project-tag">Firebase</span><span class="project-tag">Chart.js</span><span class="project-tag">PWA</span><span class="project-tag">SheetJS</span></div>
         </div>
-        <div class="project-title">StockFlow Pro — ระบบจัดการคลังสินค้า Real-time</div>
-        <p class="project-desc">ปัญหาของ SME คือสต็อกสินค้าอยู่ในโรงงาน แต่พอจะใช้จริงหาไม่เจอ — StockFlow Pro แก้ปัญหานี้ด้วย Web App ที่รองรับการรับ-เบิกสินค้า ค้นหารายการได้ทันที ดู Dashboard สต็อคแบบ Real-time และ Export รายงาน Excel ได้เลย รองรับการใช้งานออฟไลน์ผ่าน PWA</p>
+        <div class="project-title">StockFlow — ระบบจัดการคลังสินค้า Real-time</div>
+        <p class="project-desc">ปัญหาของโรงงาน คือสต็อกสินค้าอยู่ในโรงงาน แต่พอจะใช้จริงหาไม่เจอ — StockFlow แก้ปัญหานี้ด้วย Web App ที่รองรับการรับ-เบิกสินค้า ค้นหารายการได้ทันที ดู Dashboard สต็อคแบบ Real-time และ Export รายงาน Excel ได้เลย รองรับการใช้งานออฟไลน์ผ่าน PWA</p>
         <div class="project-footer">
           <div class="project-highlights">
             <span class="highlight-item"><span class="highlight-dot"></span>Real-time sync</span>
             <span class="highlight-item"><span class="highlight-dot"></span>Export Excel</span>
             <span class="highlight-item"><span class="highlight-dot"></span>PWA / Offline</span>
-            <span class="highlight-item"><span class="highlight-dot"></span>ใช้งานใน Production</span>
           </div>
-          <button class="btn-view-detail" onclick="openModal('stockflow')">ดูรายละเอียด →</button>
+          <!-- <button class="btn-view-detail" onclick="openModal('stockflow')">ดูรายละเอียด →</button> -->
         </div>
       </div>
     </div>
 
     <!-- PROJECT 2: Car Booking -->
-    <div class="project-card small reveal reveal-delay-1" data-type="liff">
-      <div class="project-preview" style="background:#0a0f0a;padding:0;overflow:hidden;">
-        <div class="project-preview-inner" style="padding:0;align-items:flex-start;">
-          <!-- 🖼️ เปลี่ยน src เป็นชื่อไฟล์รูปของคุณ เช่น images/car-booking.png -->
-          <img
-            src="images/car-booking.png"
-            alt="Car Booking — ระบบจองรถภายในองค์กร"
-            style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease;"
-            onmouseover="this.style.transform='scale(1.03)'"
-            onmouseout="this.style.transform='scale(1)'">
+    <div class="project-card small reveal reveal-delay-1" data-type="webapp liff">
+      <div class="project-preview project-slider" style="background:#0a0f0a;">
+        <div class="slider-track">
+          <!-- 🖼️ เพิ่ม/ลด <img class="slide"> ได้เลย ใส่ active ที่รูปแรก -->
+          <img class="slide active" src="images/car-booking-1.png" alt="Car Booking screenshot 1">
         </div>
+        <!-- <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
+        <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
+        <div class="slider-dots"></div> -->
         <span class="float-badge tl">LINE LIFF</span>
         <span class="float-badge br">Next.js 16</span>
       </div>
@@ -564,45 +601,31 @@
             <span class="highlight-item"><span class="highlight-dot"></span>LINE Notify</span>
             <span class="highlight-item"><span class="highlight-dot"></span>Real-time Queue</span>
           </div>
-          <button class="btn-view-detail" onclick="openModal('car-booking')">ดูรายละเอียด →</button>
+          <!-- <button class="btn-view-detail" onclick="openModal('car-booking')">ดูรายละเอียด →</button> -->
         </div>
       </div>
     </div>
 
     <!-- PROJECT 3: TimeTracker V2 -->
-    <div class="project-card medium reveal reveal-delay-1" data-type="hr">
-      <div class="project-preview" style="background:linear-gradient(135deg,#1a0f20 0%,#0f1a2e 100%)">
-        <div class="project-preview-inner" style="padding:16px">
-          <div style="width:90%;background:#111828;border-radius:8px;border:1px solid #2a1a40;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.7)">
-            <div style="background:#0a1020;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a1a40">
-              <div style="font-family:'Space Mono',monospace;font-size:8px;color:rgba(124,106,255,0.7)">TimeTracker V2 — HR System</div>
-              <div style="background:rgba(0,255,136,0.15);border:1px solid rgba(0,255,136,0.3);border-radius:20px;padding:2px 8px;font-size:7px;color:#00ff88;font-family:'Space Mono',monospace">● Online</div>
-            </div>
-            <div style="padding:10px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-              <div style="background:#1a1030;border:1px solid #3a2060;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px">
-                <div style="width:36px;height:36px;background:#2a1a50;border-radius:4px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px">
-                  <div style="background:#7c6aff;border-radius:1px"></div><div style="background:#2a1a50;border-radius:1px"></div><div style="background:#7c6aff;border-radius:1px"></div>
-                  <div style="background:#2a1a50;border-radius:1px"></div><div style="background:#7c6aff;border-radius:1px"></div><div style="background:#2a1a50;border-radius:1px"></div>
-                  <div style="background:#7c6aff;border-radius:1px"></div><div style="background:#2a1a50;border-radius:1px"></div><div style="background:#7c6aff;border-radius:1px"></div>
-                </div>
-                <div style="font-size:7px;color:#7c6aff;font-family:'Space Mono',monospace">QR Check-in</div>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:5px">
-                <div style="background:#1a1030;border-radius:4px;padding:6px;border:1px solid #2a1a40"><div style="font-size:7px;color:#5a5a80;margin-bottom:2px">พนักงานวันนี้</div><div style="font-family:'Space Mono',monospace;font-size:11px;color:#7c6aff;font-weight:700">18/24</div></div>
-                <div style="background:#1a1030;border-radius:4px;padding:6px;border:1px solid #2a1a40"><div style="font-size:7px;color:#5a5a80;margin-bottom:2px">OT รออนุมัติ</div><div style="font-family:'Space Mono',monospace;font-size:11px;color:#ffbd2e;font-weight:700">3</div></div>
-              </div>
-            </div>
-          </div>
+    <div class="project-card medium reveal reveal-delay-1" data-type="webapp">
+      <div class="project-preview project-slider" style="background:#0a0f0a;">
+        <div class="slider-track">
+          <!-- 🖼️ เพิ่ม/ลด <img class="slide"> ได้เลย ใส่ active ที่รูปแรก -->
+          <img class="slide active" src="images/timetracker-1.jpg" alt="TimeTracker screenshot 1">
+          <img class="slide" src="images/timetracker-2.jpg" alt="TimeTracker screenshot 2">
         </div>
+        <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
+        <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
+        <div class="slider-dots"></div>
         <span class="float-badge tl">HR SYSTEM</span>
         <span class="float-badge br">Next.js + Supabase</span>
       </div>
       <div class="project-body">
         <div class="project-meta">
-          <span class="project-type">Web App · Enterprise</span>
+          <span class="project-type">Web App</span>
           <div class="project-tags"><span class="project-tag">Next.js</span><span class="project-tag">TypeScript</span><span class="project-tag">Supabase</span><span class="project-tag">Tailwind</span><span class="project-tag">PWA</span></div>
         </div>
-        <div class="project-title">TimeTracker V2 — ระบบ HR & บันทึกเวลาทำงาน</div>
+        <div class="project-title">Time Attendance — ระบบ HR & บันทึกเวลาทำงาน</div>
         <p class="project-desc">ระบบบริหารจัดการพนักงานแบบครบวงจร รองรับ QR Code Check-in/out, ระบบลาออนไลน์พร้อม Logic คำนวณโควตาอัตโนมัติ, จัดการ OT และ Dashboard รายงานสำหรับ HR แบบ Real-time</p>
         <div class="project-footer">
           <div class="project-highlights">
@@ -611,7 +634,7 @@
             <span class="highlight-item"><span class="highlight-dot"></span>Leave System</span>
             <span class="highlight-item"><span class="highlight-dot"></span>HR Dashboard</span>
           </div>
-          <button class="btn-view-detail" onclick="openModal('timetracker')">ดูรายละเอียด →</button>
+          <!-- <button class="btn-view-detail" onclick="openModal('timetracker')">ดูรายละเอียด →</button> -->
         </div>
       </div>
     </div>
@@ -641,8 +664,8 @@
         <a href="#contact" class="pricing-cta outline">เริ่มต้นใช้งาน</a>
       </div>
       <div class="pricing-card popular reveal reveal-delay-2">
-        <div class="popular-badge">⚡ แนะนำ</div>
-        <div class="pricing-top"><div class="pricing-plan">Standard</div><div class="pricing-name">Web App เล็ก</div><div class="pricing-desc">Web Application พร้อม UI ใช้งานได้จริง รองรับมือถือและคอม</div></div>
+        <div class="popular-badge">Most Popular</div>
+        <div class="pricing-top"><div class="pricing-plan">Standard</div><div class="pricing-name">Web App </div><div class="pricing-desc">Web Application พร้อม UI ใช้งานได้จริง รองรับมือถือและคอม</div></div>
         <div class="pricing-price"><span class="price-currency">฿</span><span class="price-amount">3,000</span><span class="price-unit">/ โปรเจกต์</span></div>
         <div class="pricing-features">
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Web App พร้อม UI ครบชุด</span></div>
@@ -724,9 +747,7 @@
   // HAMBURGER
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-  const mobileClose = document.getElementById('mobileClose');
-  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
-  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
   function closeMobile() { mobileMenu.classList.remove('open'); }
 
   // SCROLL REVEAL
@@ -742,10 +763,11 @@
     btn.classList.add('active');
     const cards = document.querySelectorAll('.project-card');
 
-    // reset all cards
+    // reset all cards — support space-separated multi-type e.g. "webapp liff"
     cards.forEach(card => {
       const preview = card.querySelector('.project-preview');
-      if (type === 'all' || card.getAttribute('data-type') === type) {
+      const types = (card.getAttribute('data-type') || '').split(' ');
+      if (type === 'all' || types.includes(type)) {
         card.style.display = 'flex';
         card.style.gridColumn = '';
         // restore original preview height from class
@@ -757,12 +779,20 @@
 
     if (type !== 'all') {
       const visible = [...cards].filter(c => c.style.display !== 'none');
-      if (visible.length === 1) {
-        // single card: full width + taller preview
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+        // มือถือ: stack เต็มจอเสมอ ไม่ว่าจะกี่ card
+        visible.forEach(c => {
+          c.style.gridColumn = 'span 12';
+          c.querySelector('.project-preview').style.height = '200px';
+        });
+      } else if (visible.length === 1) {
+        // คอม: card เดียว full width + preview สูง
         visible[0].style.gridColumn = 'span 12';
         visible[0].querySelector('.project-preview').style.height = '420px';
       } else {
-        // multiple cards: half width each
+        // คอม: หลาย card แบ่งครึ่ง
         visible.forEach(c => {
           c.style.gridColumn = 'span 6';
           c.querySelector('.project-preview').style.height = '260px';
@@ -786,7 +816,7 @@
   const projectData = {
     'stockflow': {
       type: 'Web App · PWA',
-      title: 'StockFlow Pro — ระบบจัดการคลังสินค้า',
+      title: 'StockFlow — ระบบจัดการคลังสินค้า',
       desc: 'ระบบจัดการคลังสินค้า Real-time สำหรับ SME รองรับการรับ-เบิกสินค้า ค้นหารายการได้ทันที ดู Dashboard สต็อคแบบ Real-time และ Export รายงาน Excel รองรับการใช้งานออฟไลน์ผ่าน PWA',
       tags: ['HTML5', 'Tailwind CSS', 'Firebase', 'Chart.js', 'PWA', 'SheetJS'],
       highlights: ['Real-time sync กับ Firebase', 'Export รายงาน Excel', 'PWA — ใช้ได้แบบ Offline', 'Dashboard วิเคราะห์สต็อค'],
@@ -847,6 +877,64 @@
   document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
   document.getElementById('projectModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ===== IMAGE SLIDER =====
+  function initSliders() {
+    document.querySelectorAll('.project-slider').forEach(slider => {
+      const track = slider.querySelector('.slider-track');
+      if (!track) return;
+
+      // auto-add class="slide" ให้ทุก img ใน track แม้ไม่ได้ใส่ class มา
+      const allImgs = track.querySelectorAll('img');
+      allImgs.forEach((img, i) => {
+        img.classList.add('slide');
+        if (i === 0) img.classList.add('active');
+      });
+
+      const slides = track.querySelectorAll('.slide');
+      const dotsContainer = slider.querySelector('.slider-dots');
+      if (slides.length <= 1) {
+        // รูปเดียว ซ่อนปุ่มและ dots
+        const prev = slider.querySelector('.slider-prev');
+        const next = slider.querySelector('.slider-next');
+        if (prev) prev.style.display = 'none';
+        if (next) next.style.display = 'none';
+        return;
+      }
+
+      let current = 0;
+
+      // build dots
+      dotsContainer.innerHTML = '';
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', e => { e.stopPropagation(); goTo(i); });
+        dotsContainer.appendChild(dot);
+      });
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        dotsContainer.children[current].classList.remove('active');
+        current = (idx + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dotsContainer.children[current].classList.add('active');
+      }
+
+      const btnPrev = slider.querySelector('.slider-prev');
+      const btnNext = slider.querySelector('.slider-next');
+      if (btnPrev) btnPrev.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+      if (btnNext) btnNext.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+    });
+  }
+
+  // รอ DOM โหลดเสร็จก่อน init
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSliders);
+  } else {
+    initSliders();
+  }
+
 </script>
 </body>
 </html>
