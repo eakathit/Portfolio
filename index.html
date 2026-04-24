@@ -46,9 +46,28 @@
     backdrop-filter: blur(16px);
     box-shadow: 0 1px 16px rgba(0,0,0,0.06);
   }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--accent2); font-weight: 700; letter-spacing: 0.02em; }
+  .nav-logo {
+    font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--accent2);
+    font-weight: 700; letter-spacing: 0.02em;
+    display: flex; align-items: center; gap: 2px;
+    position: relative;
+  }
   .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-logo::after {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-left: 3px;
+    animation: navDotPulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes navDotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.6); }
+  }
+  .nav-links { display: flex; gap: 2.8rem; list-style: none; }
   .nav-links a {
     font-family: 'Inter', sans-serif; font-size: 0.82rem; color: var(--muted);
     text-decoration: none; letter-spacing: 0.02em; font-weight: 500;
@@ -105,7 +124,7 @@
   .hero-desc { font-size: 1rem; color: #4b5563; max-width: 460px; margin-bottom: 2rem; line-height: 1.9; font-weight: 400; animation: fadeSlideIn 0.8s 0.3s ease both; }
   .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeSlideIn 0.8s 0.4s ease both; }
   .btn-primary {
-    font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600;
+    font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600;
     letter-spacing: 0.01em; padding: 13px 30px;
     background: var(--accent); color: #fff; border: none; cursor: pointer;
     text-decoration: none; display: inline-block; transition: all 0.2s;
@@ -113,7 +132,7 @@
   }
   .btn-primary:hover { background: #238a7d; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,157,143,0.25); }
   .btn-secondary {
-    font-family: 'Inter', sans-serif; font-size: 0.88rem; letter-spacing: 0.01em; font-weight: 500;
+    font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.88rem; letter-spacing: 0.01em; font-weight: 500;
     padding: 12px 30px; background: transparent;
     color: var(--accent); border: 2px solid var(--accent); cursor: pointer;
     text-decoration: none; display: inline-block; transition: all 0.2s;
@@ -123,7 +142,7 @@
 
   /* HERO VISUAL */
   .hero-visual { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.2rem; animation: fadeSlideIn 1s 0.3s ease both; }
-  .hero-stat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .hero-stat-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
   .stat-card {
     background: #fff; border: 1px solid var(--border); padding: 1.8rem 1.5rem;
     border-radius: 12px; position: relative; overflow: hidden;
@@ -151,20 +170,22 @@
   /* SECTIONS */
   section { position: relative; z-index: 1; }
   .section-label { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem; font-weight: 600; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; color: var(--text); }
+  .section-title { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; color: var(--text); }
   .section-divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 3rem; border-radius: 2px; }
 
   /* SKILLS */
   #skills { padding: 6rem 4rem; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .skills-container { max-width: 1100px; margin: 0 auto; }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-  .skill-group { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; transition: box-shadow 0.3s, transform 0.3s; box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
-  .skill-group:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-3px); }
-  .skill-group-title { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .skill-group-title::before { content: ''; width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .skill-tag { font-family: 'Inter', sans-serif; font-size: 0.72rem; padding: 5px 11px; background: #f0f7f6; border: 1px solid #c5e0dc; border-radius: 6px; color: var(--accent2); letter-spacing: 0.01em; font-weight: 500; transition: all 0.2s; }
-  .skill-tag:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .skill-group { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; transition: box-shadow 0.3s, transform 0.3s; box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
+  .skill-group:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.08); transform: translateY(-3px); }
+  .skill-group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .skill-group-icon { font-size: 1rem; width: 34px; height: 34px; background: #f0f7f6; border: 1px solid #c5e0dc; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .skill-group-title { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: var(--text); letter-spacing: 0.01em; font-weight: 600; }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-chip { display: inline-flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 0.75rem; padding: 6px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-weight: 500; transition: all 0.2s; cursor: default; }
+  .skill-chip img { width: 16px; height: 16px; object-fit: contain; flex-shrink: 0; }
+  .skill-chip:hover { border-color: var(--accent); color: var(--accent); background: #f0f7f6; transform: translateY(-1px); box-shadow: 0 3px 10px rgba(42,157,143,0.1); }
 
   /* PROJECTS */
   #projects { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
@@ -175,13 +196,22 @@
   .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
 
   /* PROJECT CARD */
-  .project-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: box-shadow 0.3s, transform 0.3s; display: flex; flex-direction: column; cursor: pointer; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
-  .project-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.1); transform: translateY(-5px); }
-  .project-card.featured { grid-column: span 8; }
-  .project-card.small { grid-column: span 4; }
+  .project-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: box-shadow 0.3s, transform 0.3s; display: flex; flex-direction: column; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+  .project-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.1); transform: translateY(-4px); }
+
+  /* Featured: full-width horizontal layout */
+  .project-card.featured { grid-column: span 12; flex-direction: row; min-height: 340px; }
+  .project-card.featured .project-preview { width: 50%; height: auto; min-height: 320px; flex-shrink: 0; }
+  .project-card.featured .project-preview .slide { object-position: center center; }
+  .project-card.featured .project-body { padding: 2rem 2.2rem; justify-content: center; }
+  .project-card.featured .project-title { font-size: 1.45rem; }
+  .project-card.featured .project-desc { font-size: 0.95rem; }
+
+  /* Equal cards */
+  .project-card.small { grid-column: span 6; }
   .project-card.medium { grid-column: span 6; }
-  .project-preview { height: 200px; position: relative; overflow: hidden; flex-shrink: 0; }
-  .project-card.featured .project-preview { height: 240px; }
+
+  .project-preview { height: 220px; position: relative; overflow: hidden; flex-shrink: 0; }
   .project-preview-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.4s ease; position: relative; }
   .project-card:hover .project-preview-inner { transform: scale(1.03); }
   .float-badge { position: absolute; font-family: 'Inter', sans-serif; font-size: 0.65rem; padding: 4px 10px; border-radius: 100px; letter-spacing: 0.02em; font-weight: 600; backdrop-filter: blur(8px); }
@@ -192,7 +222,7 @@
   .project-type { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
   .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
   .project-tag { font-family: 'Inter', sans-serif; font-size: 0.68rem; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border); color: var(--muted); font-weight: 500; background: var(--surface); }
-  .project-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--text); line-height: 1.3; }
+  .project-title { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--text); line-height: 1.3; }
   .project-card.featured .project-title { font-size: 1.4rem; }
   .project-desc { font-size: 0.93rem; color: #4b5563; line-height: 1.85; flex: 1; margin-bottom: 1.2rem; font-weight: 400; }
   .project-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 0.5rem; }
@@ -204,12 +234,29 @@
 
   /* View Detail Button */
   .btn-view-detail {
-    font-family: 'Inter', sans-serif; font-size: 0.75rem; letter-spacing: 0.01em;
-    padding: 7px 16px; background: transparent;
-    border: 1.5px solid var(--accent); color: var(--accent); cursor: pointer;
+    font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.78rem; letter-spacing: 0.01em;
+    padding: 9px 20px; background: var(--accent);
+    border: none; color: #fff; cursor: pointer;
     border-radius: 8px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;
   }
-  .btn-view-detail:hover { background: rgba(42,157,143,0.07); transform: translateY(-1px); }
+  .btn-view-detail:hover { background: #238a7d; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(42,157,143,0.25); }
+
+  /* Project Status Badge */
+  .project-status { display: inline-flex; align-items: center; gap: 4px; font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; letter-spacing: 0.04em; }
+  .project-status.live { background: #ecfdf5; border: 1px solid #a7f3d0; color: #059669; }
+  .project-status.live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #059669; animation: pulse 2s infinite; }
+  .project-status.dev { background: #fef3c7; border: 1px solid #fde68a; color: #d97706; }
+  .project-status.dev::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #d97706; }
+
+  /* Project Hook */
+  .project-hook { font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.82rem; color: var(--accent); font-weight: 500; margin-bottom: 0.6rem; line-height: 1.55; padding: 0.5rem 0.75rem; background: #f0f7f6; border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0; }
+
+  /* Project Metrics */
+  .project-metrics { display: flex; gap: 0; margin: 1rem 0 0; border-top: 1px solid var(--border); padding-top: 1rem; flex-wrap: wrap; }
+  .metric-item { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 80px; padding-right: 1rem; border-right: 1px solid var(--border); margin-right: 1rem; }
+  .metric-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .metric-num { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 700; color: var(--text); }
+  .metric-label { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
 
 
   /* ===== IMAGE SLIDER ===== */
@@ -272,28 +319,28 @@
   .popular-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 0.06em; background: var(--accent); color: #fff; padding: 4px 18px; border-radius: 100px; font-weight: 600; white-space: nowrap; }
   .pricing-top { border-bottom: 1px solid var(--border); padding-bottom: 1.2rem; }
   .pricing-plan { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
-  .pricing-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+  .pricing-name { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
   .pricing-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
   .pricing-price { display: flex; align-items: baseline; gap: 4px; }
   .price-currency { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--muted); font-weight: 500; }
-  .price-amount { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--accent2); line-height: 1; }
+  .price-amount { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--accent2); line-height: 1; }
   .price-unit { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--muted); }
   .pricing-features { display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
   .pricing-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 0.83rem; color: #4b5563; line-height: 1.55; }
   .feature-check { font-size: 0.7rem; color: var(--accent); flex-shrink: 0; margin-top: 2px; font-weight: 700; }
   .feature-check.dim { color: #d1d5db; }
-  .pricing-cta { font-family: 'Inter', sans-serif; font-size: 0.82rem; letter-spacing: 0.01em; padding: 12px; text-align: center; border-radius: 9px; text-decoration: none; display: block; transition: all 0.2s; font-weight: 600; }
+  .pricing-cta { font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.82rem; letter-spacing: 0.01em; padding: 12px; text-align: center; border-radius: 9px; text-decoration: none; display: block; transition: all 0.2s; font-weight: 600; }
   .pricing-cta.outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
   .pricing-cta.outline:hover { border-color: var(--accent); color: var(--accent); }
   .pricing-cta.filled { background: var(--accent); border: 1.5px solid var(--accent); color: #fff; }
   .pricing-cta.filled:hover { background: #238a7d; box-shadow: 0 8px 24px rgba(42,157,143,0.25); }
-  .pricing-note { text-align: center; margin-top: 2rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); }
+  .pricing-note { text-align: center; margin-top: 2rem; font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); }
   .pricing-note span { color: var(--accent); font-weight: 600; }
 
   /* CONTACT */
   #contact { padding: 6rem 4rem; max-width: 800px; margin: 0 auto; text-align: center; }
   .contact-label { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
-  .contact-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.1; color: var(--text); }
+  .contact-title { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.1; color: var(--text); }
   .contact-desc { font-size: 1rem; color: var(--muted); margin-bottom: 3rem; line-height: 1.85; font-weight: 400; }
   .contact-channels { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
   .contact-channel { display: flex; align-items: center; gap: 0.7rem; padding: 1rem 1.5rem; background: #fff; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.82rem; letter-spacing: 0.01em; transition: all 0.2s; min-width: 180px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); font-weight: 500; }
@@ -309,7 +356,7 @@
 
   /* TRUST BADGES */
   .hero-trust-badges { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 2rem; }
-  .trust-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #4b5563; background: #f0f7f6; border: 1px solid #c5e0dc; padding: 6px 14px; border-radius: 8px; letter-spacing: 0.01em; transition: all 0.2s; font-weight: 500; }
+  .trust-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.75rem; color: #4b5563; background: #f0f7f6; border: 1px solid #c5e0dc; padding: 6px 14px; border-radius: 8px; letter-spacing: 0.01em; transition: all 0.2s; font-weight: 500; }
   .trust-badge:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
   .trust-icon { color: var(--accent); font-weight: 700; }
   .trust-badge:hover .trust-icon { color: #fff; }
@@ -324,7 +371,7 @@
   /* MOBILE MENU */
   .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.98); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; backdrop-filter: blur(20px); }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--text); text-decoration: none; transition: color 0.2s; }
+  .mobile-menu a { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--text); text-decoration: none; transition: color 0.2s; }
   .mobile-menu a:hover { color: var(--accent); }
   .mobile-close { position: absolute; top: 1.5rem; right: 2rem; font-family: 'Inter', sans-serif; font-size: 1.5rem; color: var(--muted); cursor: pointer; background: none; border: none; transition: color 0.2s; }
   .mobile-close:hover { color: var(--accent); }
@@ -352,15 +399,14 @@
   }
   .modal-header-left { display: flex; flex-direction: column; gap: 3px; }
   .modal-type-badge { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
-  .modal-title-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); }
+  .modal-title-text { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); }
   .modal-close-btn { width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 0.9rem; cursor: pointer; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
   .modal-close-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .modal-body { display: grid; grid-template-columns: 280px 1fr; overflow: hidden; flex: 1; min-height: 0; }
-  .modal-image-panel { border-right: 1px solid var(--border); background: var(--surface); display: flex; align-items: flex-start; justify-content: center; padding: 1.5rem 1rem; overflow-y: auto; }
-  .phone-frame { width: 200px; border: 2px solid var(--border); border-radius: 28px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.1), 0 0 0 4px #f0f2f5; flex-shrink: 0; position: relative; }
-  .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; background: var(--surface); border-radius: 0 0 14px 14px; z-index: 2; }
-  .phone-frame img { width: 100%; display: block; }
-  .modal-info-panel { padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.2rem; }
+  .modal-body { display: flex; flex-direction: column; overflow: hidden; flex: 1; min-height: 0; }
+  .modal-image-panel { width: 100%; height: 260px; flex-shrink: 0; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface); position: relative; }
+  .modal-image-panel img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .modal-image-panel .img-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--muted); }
+  .modal-info-panel { padding: 1.5rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 1.2rem; }
   .modal-desc-text { font-size: 0.95rem; color: #4b5563; line-height: 1.85; }
   .modal-section-label { font-family: 'Inter', sans-serif; font-size: 0.66rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
   .modal-tags-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -375,9 +421,14 @@
     .hero { grid-template-columns: 1fr; padding: 5rem 2.5rem 3rem; }
     .hero-visual { display: none; }
     .hero-desc { max-width: 100%; }
-    .project-card.featured { grid-column: span 12; }
-    .project-card.small { grid-column: span 12; }
-    .project-card.medium { grid-column: span 12; }
+    /* Featured goes back to column on tablet */
+    .project-card.featured { flex-direction: column; min-height: unset; }
+    .project-card.featured .project-preview { width: 100%; height: 260px; min-height: unset; }
+    .project-card.featured .project-body { padding: 1.5rem; }
+    .project-card.featured .project-title { font-size: 1.2rem; }
+    /* 2 cards stay side by side on tablet */
+    .project-card.small { grid-column: span 6; }
+    .project-card.medium { grid-column: span 6; }
     .about-inner { grid-template-columns: 1fr; gap: 3rem; }
   }
   @media (max-width: 768px) {
@@ -387,8 +438,12 @@
     .hero { padding: 5rem 1.5rem 3rem; }
     .hero-name { font-size: 2.4rem; }
     #skills, #about, #contact { padding: 4rem 1.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
     #projects { padding: 4rem 1.5rem; }
     .projects-header { flex-direction: column; align-items: flex-start; }
+    .project-card.featured { grid-column: span 12; }
+    .project-card.small { grid-column: span 12; }
+    .project-card.medium { grid-column: span 12; }
     footer { padding: 1.5rem; flex-direction: column; text-align: center; }
     .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
     #pricing { padding: 4rem 1.5rem; }
@@ -408,9 +463,7 @@
     .modal-overlay { padding: 0; align-items: flex-end; }
     .modal-container { border-radius: 16px 16px 0 0; max-height: 92vh; transform: translateY(100%); }
     .modal-overlay.open .modal-container { transform: translateY(0); }
-    .modal-body { grid-template-columns: 1fr; }
-    .modal-image-panel { border-right: none; border-bottom: 1px solid var(--border); padding: 1.2rem; }
-    .phone-frame { width: 160px; }
+    .modal-image-panel { height: 200px; }
   }
 </style>
 </head>
@@ -446,14 +499,14 @@
     <div class="hero-badge">Available Now</div>
     <h1 class="hero-name">
       <span class="name-serif">Hi, I'm Aum</span>
-      <span class="accent-line">Full Stack Dev</span>
+      <span class="accent-line">Web Application & Automation Specialist</span>
     </h1>
     <p class="hero-role">Full Stack Solutions · Business Systems · Custom Development</p>
-    <p class="hero-desc">รับออกแบบและพัฒนาซอฟต์แวร์ครบวงจร <strong style="color:var(--text)">Web Application</strong> และ <strong style="color:var(--text)">Automation</strong> เพื่อลดขั้นตอนการทำงานที่ซับซ้อน เปลี่ยนงาน Manual ให้เป็นระบบอัตโนมัติที่แม่นยำและช่วยขับเคลื่อนธุรกิจของคุณให้ไปได้ไกลกว่าเดิม</p>
+    <p class="hero-desc">ยกระดับธุรกิจด้วย <strong style="color:var(--text)">Web Application</strong> และระบบ <strong style="color:var(--text)">Automation</strong> ครบวงจร เปลี่ยนกระบวนการ Manual ที่ซับซ้อน ให้เป็นระบบอัตโนมัติที่แม่นยำ และพร้อมรองรับการเติบโตของคุณ</p>
     <div class="hero-trust-badges">
-      <div class="trust-badge"><span class="trust-icon">✓</span> ทำตาม Requirement</div>
-      <div class="trust-badge"><span class="trust-icon">✓</span> ส่งตรงเวลา</div>
-      <div class="trust-badge"><span class="trust-icon">✓</span> Support หลังส่งงาน</div>
+      <div class="trust-badge"><span class="trust-icon">✓</span> Business Logic Focused</div>
+      <div class="trust-badge"><span class="trust-icon">✓</span> Modern Tech Stack</div>
+      <div class="trust-badge"><span class="trust-icon">✓</span> Reliable Support</div>
     </div>
     <div class="hero-btns">
       <a href="#projects" class="btn-primary">ดูโปรเจกต์</a>
@@ -462,17 +515,21 @@
   </div>
   <div class="hero-visual">
     <div class="hero-stat-cards">
-      <div class="stat-card"><div class="stat-num">5<sup>+</sup></div><div class="stat-label">Projects Done</div></div>
+      <div class="stat-card"><div class="stat-num">8<sup>+</sup></div><div class="stat-label">Projects Done</div></div>
       <div class="stat-card"><div class="stat-num">1<sup style="color:var(--muted);font-size:0.8rem">yr</sup></div><div class="stat-label">Experience</div></div>
+      <div class="stat-card">
+        <div class="stat-num">100<sup style="font-family:'Inter',sans-serif;font-size:0.75rem;color:var(--accent)">%</sup></div>
+        <div class="stat-label">On-Time</div>
+      </div>
     </div>
     <div class="code-block">
       <div><span class="line-num">01</span><span class="cm">// tech stack</span></div>
       <div><span class="line-num">02</span><span class="kw">const</span> stack = {</div>
-      <div><span class="line-num">03</span>&nbsp;&nbsp;frontend: <span class="str">"React, Next.js, Tailwind, HTML/CSS/JS"</span>,</div>
-      <div><span class="line-num">04</span>&nbsp;&nbsp;backend: <span class="str">"Node.js, GAS, Express"</span>,</div>
-      <div><span class="line-num">05</span>&nbsp;&nbsp;database: <span class="str">"Firebase, Supabase"</span>,</div>
-      <div><span class="line-num">07</span>};</div>
-      <div><span class="line-num">08</span><span class="fn">buildSolution</span>(stack);</div>
+      <div><span class="line-num">03</span>&nbsp;&nbsp;frontend: <span class="str">"React, Next.js, TypeScript, Tailwind"</span>,</div>
+      <div><span class="line-num">04</span>&nbsp;&nbsp;backend:&nbsp; <span class="str">"Node.js, Express, GAS"</span>,</div>
+      <div><span class="line-num">05</span>&nbsp;&nbsp;database: <span class="str">"Supabase, Firebase, PostgreSQL"</span>,</div>
+      <div><span class="line-num">06</span>};</div>
+      <div><span class="line-num">07</span><span class="fn">buildSolution</span>(stack);</div>
     </div>
   </div>
 </section>
@@ -480,22 +537,79 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-inner">
+
     <div class="reveal">
       <div class="section-label">// 01 — About</div>
-      <h2 class="section-title">ทำไมต้องเลือก<br><span style="color:var(--accent)">ผม?</span></h2>
+      <h2 class="section-title">
+        ทำไมต้องเลือก<br>
+        <span style="color:var(--accent)">ผม?</span>
+      </h2>
+
       <div class="section-divider"></div>
+
       <div class="about-text">
-        <p>ผมเป็น <strong>Full Stack Developer</strong> ที่เน้นการสร้าง <strong>Digital Solutions</strong> เพื่อแก้ปัญหาธุรกิจโดยเฉพาะ ไม่ว่าจะเป็นการสร้างภาพลักษณ์ผ่าน Landing Page การพัฒนา Web Application ซับซ้อน หรือการทำระบบ Automation เพื่อเพิ่มประสิทธิภาพให้ธุรกิจ</p>
-        <p>ผมให้ความสำคัญกับโครงสร้างที่ <strong>รองรับการเติบโต (Scalability)</strong> และโค้ดที่เป็นระเบียบ เพื่อให้ระบบของคุณพร้อมใช้งานในระยะยาวและขยายตัวได้ตามธุรกิจในอนาคต</p>
-        <p>ด้วยประสบการณ์ทำงานร่วมกับธุรกิจตั้งแต่ระดับ <strong>SME จนถึง Enterprise</strong> ผมจึงเข้าใจหัวใจของระบบที่ต้อง รวดเร็ว แม่นยำ และใช้งานได้ดีจริงบนทุกอุปกรณ์</p>
+        <p>
+          ผมช่วยธุรกิจสร้าง <strong>Landing Page และ Web Application</strong>
+          ที่ไม่ได้แค่ดูดี แต่ต้องช่วยให้ธุรกิจทำงานได้ง่ายขึ้น
+          ลดขั้นตอนที่ซ้ำซ้อน และเพิ่มประสิทธิภาพในการจัดการข้อมูล
+        </p>
+
+        <p>
+          สำหรับ <strong>Landing Page</strong> ผมเน้นการออกแบบที่สื่อสารชัดเจน
+          เข้าใจง่าย และช่วยเพิ่มโอกาสในการเปลี่ยนผู้เข้าชมให้เป็นลูกค้า
+          พร้อมรองรับการใช้งานบนทุกอุปกรณ์
+        </p>
+
+        <p>
+          สำหรับ <strong>Web Application</strong> ผมพัฒนาระบบที่ช่วยจัดการงานจริง
+          เช่น ระบบสต็อก ระบบฟอร์ม ระบบหลังบ้าน และการเชื่อมต่อข้อมูลอัตโนมัติ
+          เพื่อลดการทำงานแบบ manual และลดความผิดพลาด
+        </p>
+
+        <p>
+          ผมให้ความสำคัญกับระบบที่ <strong>ใช้งานง่าย</strong> เรียนรู้ไม่ยาก
+          และสามารถ <strong>ต่อยอดได้ในอนาคต</strong> เพื่อให้ธุรกิจของคุณ
+          เติบโตได้โดยไม่ต้องเปลี่ยนระบบใหม่ทั้งหมด
+        </p>
       </div>
     </div>
+
     <div class="about-services reveal reveal-delay-2">
-      <div class="service-item"><div class="service-icon">🌐</div><div class="service-info"><h4>Web Application</h4><p>สร้างเว็บแอปพลิเคชันครบวงจร ตั้งแต่ UI/UX ถึง Backend</p></div></div>
-      <div class="service-item"><div class="service-icon">📊</div><div class="service-info"><h4>Google Apps Script</h4><p>Automate งานใน Google Workspace เชื่อมต่อ Sheets, Forms, Drive</p></div></div>
-      <div class="service-item"><div class="service-icon">⚡</div><div class="service-info"><h4>Automation & Integration</h4><p>เชื่อมต่อระบบต่างๆ ลดงาน manual ด้วย API Integration</p></div></div>
-      <div class="service-item"><div class="service-icon">📱</div><div class="service-info"><h4>Responsive UI Design</h4><p>ออกแบบ UI สวยงาม ใช้งานง่าย รองรับทุกขนาดหน้าจอ</p></div></div>
+
+      <div class="service-item">
+        <div class="service-icon">🌐</div>
+        <div class="service-info">
+          <h4>Landing Page</h4>
+          <p>ออกแบบหน้าเว็บเพื่อขายสินค้า/บริการ เน้นสื่อสารชัดและเพิ่ม Conversion</p>
+        </div>
+      </div>
+
+      <div class="service-item">
+        <div class="service-icon">🧩</div>
+        <div class="service-info">
+          <h4>Web Application</h4>
+          <p>พัฒนาระบบสำหรับจัดการข้อมูล เช่น สต็อก ฟอร์ม และระบบหลังบ้าน</p>
+        </div>
+      </div>
+
+      <div class="service-item">
+        <div class="service-icon">⚡</div>
+        <div class="service-info">
+          <h4>Automation</h4>
+          <p>ลดงานซ้ำด้วยระบบอัตโนมัติ เช่น บันทึกข้อมูล แจ้งเตือน และ workflow</p>
+        </div>
+      </div>
+
+      <div class="service-item">
+        <div class="service-icon">🔗</div>
+        <div class="service-info">
+          <h4>Integration</h4>
+          <p>เชื่อมระบบต่าง ๆ เช่น Google Sheets, LINE, API เพื่อให้ทำงานร่วมกันได้</p>
+        </div>
+      </div>
+
     </div>
+
   </div>
 </section>
 
@@ -508,22 +622,67 @@
       <div class="section-divider"></div>
     </div>
     <div class="skills-grid">
+
+      <!-- Frontend -->
       <div class="skill-group reveal reveal-delay-1">
-        <div class="skill-group-title">Frontend</div>
-        <div class="skill-tags"><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">React.js</span><span class="skill-tag">Tailwind CSS</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">Responsive Design</span></div>
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🎨</div>
+          <div class="skill-group-title">Frontend</div>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="">HTML5</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="">CSS3</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="">JavaScript</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="">TypeScript</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="">React</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="">Next.js</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="">Tailwind CSS</span>
+        </div>
       </div>
+
+      <!-- Backend -->
       <div class="skill-group reveal reveal-delay-2">
-        <div class="skill-group-title">Backend & Runtime</div>
-        <div class="skill-tags"><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">REST API</span><span class="skill-tag">Google Apps Script</span><span class="skill-tag">Web App GAS</span></div>
+        <div class="skill-group-header">
+          <div class="skill-group-icon">⚙️</div>
+          <div class="skill-group-title">Backend & Runtime</div>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="">Node.js</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" alt="">Express.js</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="">Google Apps Script</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" alt="">Google Cloud</span>
+        </div>
       </div>
+
+      <!-- Database -->
       <div class="skill-group reveal reveal-delay-1">
-        <div class="skill-group-title">Google Workspace</div>
-        <div class="skill-tags"><span class="skill-tag">Google Sheets API</span><span class="skill-tag">Google Forms</span><span class="skill-tag">Google Drive API</span><span class="skill-tag">Gmail API</span><span class="skill-tag">Google Calendar</span><span class="skill-tag">Looker Studio</span></div>
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🗄️</div>
+          <div class="skill-group-title">Database & Cloud</div>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" alt="">Supabase</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" alt="">Firebase</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="">PostgreSQL</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="">MySQL</span>
+        </div>
       </div>
+
+      <!-- Tools -->
       <div class="skill-group reveal reveal-delay-2">
-        <div class="skill-group-title">Database & Tools</div>
-        <div class="skill-tags"><span class="skill-tag">Firebase</span><span class="skill-tag">MySQL</span><span class="skill-tag">Supabase</span><span class="skill-tag">Git / GitHub</span><span class="skill-tag">Vercel</span><span class="skill-tag">Figma</span></div>
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🛠️</div>
+          <div class="skill-group-title">Tools & Workflow</div>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="">Git</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="">GitHub</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="">Figma</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" alt="">Vercel</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="">VS Code</span>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -539,7 +698,7 @@
     <div class="filter-tabs">
       <button class="filter-tab active" onclick="filterProjects('all', this)">All</button>
       <button class="filter-tab" onclick="filterProjects('webapp', this)">Web App</button>
-      <button class="filter-tab" onclick="filterProjects('liff', this)">LINE LIFF</button>
+      <button class="filter-tab" onclick="filterProjects('website', this)">Website</button>
     </div>
   </div>
 
@@ -549,7 +708,6 @@
     <div class="project-card featured reveal" data-type="webapp">
       <div class="project-preview project-slider" style="background:#0a0f0a;">
         <div class="slider-track">
-          <!-- 🖼️ เพิ่ม/ลด <img class="slide"> ได้เลย ใส่ active ที่รูปแรก -->
           <img class="slide active" src="images/stockflow-1.jpg" alt="StockFlow Pro screenshot 1">
           <img class="slide" src="images/stockflow-2.jpg" alt="StockFlow Pro screenshot 2">
           <img class="slide" src="images/stockflow-3.jpg" alt="StockFlow Pro screenshot 3">
@@ -558,53 +716,53 @@
         <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
         <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
         <div class="slider-dots"></div>
-        <span class="float-badge tl">📦 FEATURED</span>
+        <span class="float-badge tl">📦 Featured</span>
         <span class="float-badge br">Firebase + PWA</span>
       </div>
       <div class="project-body">
         <div class="project-meta">
           <span class="project-type">Web App</span>
-          <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">Tailwind CSS</span><span class="project-tag">Firebase</span><span class="project-tag">Chart.js</span><span class="project-tag">PWA</span><span class="project-tag">SheetJS</span></div>
+          <span class="project-status live">Live</span>
+          <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">Tailwind</span><span class="project-tag">Firebase</span><span class="project-tag">Chart.js</span><span class="project-tag">PWA</span></div>
         </div>
         <div class="project-title">StockFlow — ระบบจัดการคลังสินค้า Real-time</div>
-        <p class="project-desc">ปัญหาของโรงงาน คือสต็อกสินค้าอยู่ในโรงงาน แต่พอจะใช้จริงหาไม่เจอ — StockFlow แก้ปัญหานี้ด้วย Web App ที่รองรับการรับ-เบิกสินค้า ค้นหารายการได้ทันที ดู Dashboard สต็อคแบบ Real-time และ Export รายงาน Excel ได้เลย รองรับการใช้งานออฟไลน์ผ่าน PWA</p>
-        <div class="project-footer">
-          <div class="project-highlights">
-            <span class="highlight-item"><span class="highlight-dot"></span>Real-time sync</span>
-            <span class="highlight-item"><span class="highlight-dot"></span>Export Excel</span>
-            <span class="highlight-item"><span class="highlight-dot"></span>PWA / Offline</span>
-          </div>
-          <!-- <button class="btn-view-detail" onclick="openModal('stockflow')">ดูรายละเอียด →</button> -->
+        <div class="project-hook">📦 โรงงานหาสต็อกไม่เจอ? — ระบบนี้ช่วยให้รู้ว่ามีอะไร เหลือเท่าไร และอยู่ที่ไหน ทันที</div>
+        <p class="project-desc">Web App สำหรับรับ-เบิกสินค้า ค้นหารายการได้ในทันที ดู Dashboard สต็อกแบบ Real-time และ Export รายงาน Excel ได้เลย รองรับการใช้งานออฟไลน์ผ่าน PWA</p>
+        <div class="project-metrics">
+          <div class="metric-item"><div class="metric-num">Real-time</div><div class="metric-label">Data Sync</div></div>
+          <div class="metric-item"><div class="metric-num">PWA</div><div class="metric-label">Offline Ready</div></div>
+          <div class="metric-item"><div class="metric-num">Excel</div><div class="metric-label">Export Report</div></div>
+        </div>
+        <div class="project-footer" style="padding-top:1rem; border-top:none;">
+          <button class="btn-view-detail" onclick="openModal('stockflow')">ดูรายละเอียด →</button>
         </div>
       </div>
     </div>
 
     <!-- PROJECT 2: Car Booking -->
-    <div class="project-card small reveal reveal-delay-1" data-type="webapp liff">
+    <div class="project-card small reveal reveal-delay-1" data-type="webapp">
       <div class="project-preview project-slider" style="background:#0a0f0a;">
         <div class="slider-track">
-          <!-- 🖼️ เพิ่ม/ลด <img class="slide"> ได้เลย ใส่ active ที่รูปแรก -->
           <img class="slide active" src="images/car-booking-1.png" alt="Car Booking screenshot 1">
         </div>
-        <!-- <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
-        <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
-        <div class="slider-dots"></div> -->
         <span class="float-badge tl">LINE LIFF</span>
         <span class="float-badge br">Next.js 16</span>
       </div>
       <div class="project-body">
         <div class="project-meta">
-          <span class="project-type">Web App · LINE LIFF</span>
-          <div class="project-tags"><span class="project-tag">Next.js 16</span><span class="project-tag">Firebase</span><span class="project-tag">LINE LIFF</span><span class="project-tag">LINE Notify</span></div>
+          <span class="project-type">Web App · LIFF</span>
+          <span class="project-status live">Live</span>
+          <div class="project-tags"><span class="project-tag">Next.js</span><span class="project-tag">Firebase</span><span class="project-tag">LINE LIFF</span></div>
         </div>
-        <div class="project-title">Car Booking — ระบบจองรถภายในองค์กร</div>
-        <p class="project-desc">Web App สำหรับจองรถภายในองค์กร ตรวจสอบคิวและสถานะรถแบบ Real-time พร้อมแจ้งเตือนผ่าน LINE ทันทีที่มีการจอง เปิดใช้งานตรงใน LINE ได้เลยผ่าน LIFF</p>
-        <div class="project-footer">
-          <div class="project-highlights">
-            <span class="highlight-item"><span class="highlight-dot"></span>LINE Notify</span>
-            <span class="highlight-item"><span class="highlight-dot"></span>Real-time Queue</span>
-          </div>
-          <!-- <button class="btn-view-detail" onclick="openModal('car-booking')">ดูรายละเอียด →</button> -->
+        <div class="project-title">Car Booking — จองรถภายในองค์กร</div>
+        <div class="project-hook">🚗 หมดปัญหารถซ้อนคิว — จองได้ทันทีใน LINE ไม่ต้องโทรถาม</div>
+        <p class="project-desc">จองรถในองค์กร ตรวจสอบคิว Real-time พร้อมแจ้งเตือน LINE ทันทีเมื่อมีการจอง เปิดใช้ได้เลยใน LINE ผ่าน LIFF</p>
+        <div class="project-metrics">
+          <div class="metric-item"><div class="metric-num">LINE</div><div class="metric-label">Notify</div></div>
+          <div class="metric-item"><div class="metric-num">Real-time</div><div class="metric-label">Queue</div></div>
+        </div>
+        <div class="project-footer" style="padding-top:1rem; border-top:none;">
+          <button class="btn-view-detail" onclick="openModal('car-booking')">ดูรายละเอียด →</button>
         </div>
       </div>
     </div>
@@ -613,39 +771,53 @@
     <div class="project-card medium reveal reveal-delay-1" data-type="webapp">
       <div class="project-preview project-slider" style="background:#0a0f0a;">
         <div class="slider-track">
-          <!-- 🖼️ เพิ่ม/ลด <img class="slide"> ได้เลย ใส่ active ที่รูปแรก -->
           <img class="slide active" src="images/timetracker-1.jpg" alt="TimeTracker screenshot 1">
           <img class="slide" src="images/timetracker-2.jpg" alt="TimeTracker screenshot 2">
         </div>
         <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
         <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
         <div class="slider-dots"></div>
-        <span class="float-badge tl">HR SYSTEM</span>
+        <span class="float-badge tl">HR System</span>
         <span class="float-badge br">Next.js + Supabase</span>
       </div>
       <div class="project-body">
         <div class="project-meta">
           <span class="project-type">Web App</span>
-          <div class="project-tags"><span class="project-tag">Next.js</span><span class="project-tag">TypeScript</span><span class="project-tag">Supabase</span><span class="project-tag">Tailwind</span><span class="project-tag">PWA</span></div>
+          <span class="project-status live">Live</span>
+          <div class="project-tags"><span class="project-tag">Next.js</span><span class="project-tag">TypeScript</span><span class="project-tag">Supabase</span><span class="project-tag">Tailwind</span></div>
         </div>
-        <div class="project-title">Time Attendance — ระบบ HR & บันทึกเวลาทำงาน</div>
-        <p class="project-desc">ระบบบริหารจัดการพนักงานแบบครบวงจร รองรับ QR Code Check-in/out, ระบบลาออนไลน์พร้อม Logic คำนวณโควตาอัตโนมัติ, จัดการ OT และ Dashboard รายงานสำหรับ HR แบบ Real-time</p>
-        <div class="project-footer">
-          <div class="project-highlights">
-            <span class="highlight-item"><span class="highlight-dot"></span>QR Check-in</span>
-            <span class="highlight-item"><span class="highlight-dot"></span>OT Management</span>
-            <span class="highlight-item"><span class="highlight-dot"></span>Leave System</span>
-            <span class="highlight-item"><span class="highlight-dot"></span>HR Dashboard</span>
-          </div>
-          <!-- <button class="btn-view-detail" onclick="openModal('timetracker')">ดูรายละเอียด →</button> -->
+        <div class="project-title">Time Attendance — ระบบ HR & บันทึกเวลา</div>
+        <div class="project-hook">🕐 HR ไม่ต้องนับวันลาเอง — ระบบคำนวณ OT และโควตาวันลาให้อัตโนมัติ</div>
+        <p class="project-desc">ระบบ HR ครบวงจร QR Code Check-in/out, ระบบลาออนไลน์, คำนวณ OT อัตโนมัติ และ Dashboard รายงานแบบ Real-time สำหรับ HR</p>
+        <div class="project-metrics">
+          <div class="metric-item"><div class="metric-num">QR Code</div><div class="metric-label">Check-in/out</div></div>
+          <div class="metric-item"><div class="metric-num">Auto</div><div class="metric-label">OT Calc</div></div>
+          <div class="metric-item"><div class="metric-num">PWA</div><div class="metric-label">Mobile Ready</div></div>
+        </div>
+        <div class="project-footer" style="padding-top:1rem; border-top:none;">
+          <button class="btn-view-detail" onclick="openModal('timetracker')">ดูรายละเอียด →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEBSITE placeholder (coming soon) -->
+    <div class="project-card medium reveal reveal-delay-1" data-type="website" style="display:none">
+      <div class="project-preview" style="background: var(--surface); display:flex; align-items:center; justify-content:center; height:220px;">
+        <span style="font-size:2.5rem">🚧</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-type">Website</span><span class="project-status dev">Coming Soon</span></div>
+        <div class="project-title">กำลังเตรียมโปรเจกต์</div>
+        <div class="project-hook">🌐 กำลังอัปเดตผลงาน Website ใหม่ — ติดตามได้เร็วๆ นี้</div>
+        <p class="project-desc">หากสนใจสั่งทำ Landing Page หรือ Website สามารถติดต่อได้โดยตรงครับ</p>
+        <div class="project-footer" style="padding-top:1rem; border-top:none;">
+          <a href="#contact" class="btn-view-detail">ติดต่อสอบถาม →</a>
         </div>
       </div>
     </div>
 
   </div>
 </section>
-
-<!-- PRICING -->
 <section id="pricing">
   <div class="pricing-container">
     <div class="reveal">
@@ -655,14 +827,14 @@
     </div>
     <div class="pricing-grid">
       <div class="pricing-card reveal reveal-delay-1">
-        <div class="pricing-top"><div class="pricing-plan">Basic</div><div class="pricing-name">GAS Script</div><div class="pricing-desc">เหมาะสำหรับงาน Automation เล็กๆ ใน Google Workspace</div></div>
-        <div class="pricing-price"><span class="price-currency">฿</span><span class="price-amount">500</span><span class="price-unit">/ งาน</span></div>
+        <div class="pricing-top"><div class="pricing-plan">Basic</div><div class="pricing-name">Website / Landing Page</div><div class="pricing-desc">เหมาะสำหรับธุรกิจที่อยากมีเว็บไซต์แนะนำตัว ดูเป็นมืออาชีพ</div></div>
+        <div class="pricing-price"><span class="price-currency">฿</span><span class="price-amount">1,500</span><span class="price-unit">/ โปรเจกต์</span></div>
         <div class="pricing-features">
-          <div class="pricing-feature"><span class="feature-check">✓</span><span>Google Apps Script ตามที่กำหนด</span></div>
-          <div class="pricing-feature"><span class="feature-check">✓</span><span>เชื่อมต่อ Google Sheets / Forms</span></div>
+          <div class="pricing-feature"><span class="feature-check">✓</span><span>Landing Page ออกแบบตามแบรนด์</span></div>
+          <div class="pricing-feature"><span class="feature-check">✓</span><span>Responsive — มือถือ + คอม</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>ทำตาม Requirement ของลูกค้า</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Support 7 วันหลังส่งงาน</span></div>
-          <div class="pricing-feature"><span class="feature-check dim">–</span><span style="color:var(--muted)">ไม่รวม UI / Frontend</span></div>
+          <div class="pricing-feature"><span class="feature-check dim">–</span><span style="color:var(--muted)">ไม่รวม Backend / Database</span></div>
         </div>
         <a href="#contact" class="pricing-cta outline">เริ่มต้นใช้งาน</a>
       </div>
@@ -704,7 +876,7 @@
     <h2 class="contact-title">พร้อมรับงาน<br><span style="color:var(--accent)">ติดต่อได้เลย</span></h2>
     <p class="contact-desc">มีโปรเจกต์ในใจอยู่แล้ว? หรืออยากปรึกษาก่อน?<br>ตอบ inbox ภายใน 24 ชั่วโมง ยินดีช่วยเสมอครับ</p>
     <div class="contact-channels">
-      <a href="mailto:eakarthit@gmail.com" class="contact-channel"><span class="channel-icon">✉️</span><span>eakarthit@gmail.com</span></a>
+      <a href="mailto:eakarthitx@gmail.com" class="contact-channel"><span class="channel-icon">✉️</span><span>eakarthitx@gmail.com</span></a>
       <a href="https://line.me/ti/p/eakarthit" class="contact-channel"><span class="channel-icon">💬</span><span>LINE: eakarthit</span></a>
     </div>
     <a href="mailto:eakarthit@gmail.com" class="btn-primary" style="display:inline-block">ส่งงานให้ผมเลย →</a>
@@ -766,40 +938,25 @@
     btn.classList.add('active');
     const cards = document.querySelectorAll('.project-card');
 
-    // reset all cards — support space-separated multi-type e.g. "webapp liff"
+    // Show/hide + clear all inline overrides so CSS classes take over
     cards.forEach(card => {
-      const preview = card.querySelector('.project-preview');
       const types = (card.getAttribute('data-type') || '').split(' ');
-      if (type === 'all' || types.includes(type)) {
-        card.style.display = 'flex';
-        card.style.gridColumn = '';
-        // restore original preview height from class
-        preview.style.height = card.classList.contains('featured') ? '240px' : '200px';
-      } else {
-        card.style.display = 'none';
-      }
+      card.style.display = (type === 'all' || types.includes(type)) ? '' : 'none';
+      card.style.gridColumn = '';
+      card.style.flexDirection = '';
+      const preview = card.querySelector('.project-preview');
+      if (preview) { preview.style.height = ''; }
     });
 
-    if (type !== 'all') {
-      const visible = [...cards].filter(c => c.style.display !== 'none');
-      const isMobile = window.innerWidth <= 768;
-
-      if (isMobile) {
-        // มือถือ: stack เต็มจอเสมอ ไม่ว่าจะกี่ card
-        visible.forEach(c => {
-          c.style.gridColumn = 'span 12';
-          c.querySelector('.project-preview').style.height = '200px';
-        });
-      } else if (visible.length === 1) {
-        // คอม: card เดียว full width + preview สูง
-        visible[0].style.gridColumn = 'span 12';
-        visible[0].querySelector('.project-preview').style.height = '420px';
-      } else {
-        // คอม: หลาย card แบ่งครึ่ง
-        visible.forEach(c => {
-          c.style.gridColumn = 'span 6';
-          c.querySelector('.project-preview').style.height = '260px';
-        });
+    // Only intervene when exactly 1 card is visible (center it full-width)
+    const visible = [...cards].filter(c => c.style.display !== 'none');
+    if (visible.length === 1 && window.innerWidth > 768) {
+      const c = visible[0];
+      c.style.gridColumn = 'span 12';
+      if (!c.classList.contains('featured')) {
+        c.style.flexDirection = 'column';
+        const preview = c.querySelector('.project-preview');
+        if (preview) preview.style.height = '300px';
       }
     }
   }
@@ -860,12 +1017,10 @@
     document.getElementById('modalHighlights').innerHTML = d.highlights.map(h => `<div class="modal-highlight-item"><span class="modal-highlight-dot"></span>${h}</div>`).join('');
 
     const panel = document.getElementById('modalImagePanel');
-    if (d.image && d.isPhone) {
-      panel.innerHTML = `<div class="phone-frame"><div class="phone-notch"></div><img src="${d.image}" alt="${d.title}" loading="lazy" style="width:100%;display:block;"></div>`;
-    } else if (d.image) {
-      panel.innerHTML = `<img src="${d.image}" alt="${d.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`;
+    if (d.image) {
+      panel.innerHTML = `<img src="${d.image}" alt="${d.title}" loading="lazy">`;
     } else {
-      panel.innerHTML = `<div style="width:180px;height:300px;border:2px dashed var(--border);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);"><span style="font-size:2rem;">🖥️</span><span style="font-family:Inter,sans-serif;font-size:0.72rem;text-align:center;">No Screenshot</span></div>`;
+      panel.innerHTML = `<div class="img-placeholder"><span style="font-size:2.5rem;">🖥️</span><span style="font-family:Inter,sans-serif;font-size:0.8rem;">No Screenshot</span></div>`;
     }
 
     document.getElementById('projectModal').classList.add('open');
