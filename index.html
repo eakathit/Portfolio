@@ -240,6 +240,8 @@
     border-radius: 8px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;
   }
   .btn-view-detail:hover { background: #238a7d; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(42,157,143,0.25); }
+  .btn-view-detail:disabled { opacity: 1; cursor: default; background: var(--accent); color: #fff; pointer-events: none; }
+  .btn-view-detail:disabled:hover { background: var(--accent); transform: none; box-shadow: none; }
 
   /* Project Status Badge */
   .project-status { display: inline-flex; align-items: center; gap: 4px; font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; letter-spacing: 0.04em; }
