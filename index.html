@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio — Full Stack Developer</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -326,7 +327,7 @@
   .pricing-price { display: flex; align-items: baseline; gap: 4px; }
   .price-currency { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--muted); font-weight: 500; }
   .price-amount { font-family: 'Noto Sans Thai', 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--accent2); line-height: 1; }
-  .price-unit { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--muted); }
+  .price-unit { font-family: 'Noto Sans Thai', 'Inter', sans-serif; font-size: 0.72rem; color: var(--muted); }
   .pricing-features { display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
   .pricing-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 0.83rem; color: #4b5563; line-height: 1.55; }
   .feature-check { font-size: 0.7rem; color: var(--accent); flex-shrink: 0; margin-top: 2px; font-weight: 700; }
@@ -406,8 +407,20 @@
   .modal-close-btn:hover { border-color: var(--accent); color: var(--accent); }
   .modal-body { display: flex; flex-direction: column; overflow: hidden; flex: 1; min-height: 0; }
   .modal-image-panel { width: 100%; height: 260px; flex-shrink: 0; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface); position: relative; }
-  .modal-image-panel img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .modal-image-panel img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
   .modal-image-panel .img-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--muted); }
+  /* Modal slider */
+  .modal-slider-track { width: 100%; height: 100%; position: relative; }
+  .modal-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; opacity: 0; transition: opacity 0.4s ease; }
+  .modal-slide.active { opacity: 1; }
+  .modal-slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 32px; height: 32px; background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.1); color: var(--text); font-size: 1.1rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; backdrop-filter: blur(6px); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+  .modal-slider-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .modal-slider-prev { left: 10px; }
+  .modal-slider-next { right: 10px; }
+  .modal-slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 10; }
+  .modal-slider-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.15); cursor: pointer; transition: all 0.2s; padding: 0; }
+  .modal-slider-dot.active { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
+  .modal-img-counter { position: absolute; top: 10px; right: 12px; font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600; background: rgba(0,0,0,0.45); color: #fff; padding: 3px 10px; border-radius: 100px; z-index: 10; letter-spacing: 0.04em; }
   .modal-info-panel { padding: 1.5rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 1.2rem; }
   .modal-desc-text { font-size: 0.95rem; color: #4b5563; line-height: 1.85; }
   .modal-section-label { font-family: 'Inter', sans-serif; font-size: 0.66rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
@@ -736,7 +749,7 @@
           <div class="metric-item"><div class="metric-num">Excel</div><div class="metric-label">Export Report</div></div>
         </div>
         <div class="project-footer" style="padding-top:1rem; border-top:none;">
-          <button class="btn-view-detail" onclick="openModal('stockflow')" disabled>ดูรายละเอียด →</button>
+          <button class="btn-view-detail" onclick="openModal('stockflow')">ดูรายละเอียด →</button>
         </div>
       </div>
     </div>
@@ -797,7 +810,32 @@
           <div class="metric-item"><div class="metric-num">PWA</div><div class="metric-label">Mobile Ready</div></div>
         </div>
         <div class="project-footer" style="padding-top:1rem; border-top:none;">
-          <button class="btn-view-detail" onclick="openModal('timetracker')" disabled>ดูรายละเอียด →</button>
+          <button class="btn-view-detail" onclick="openModal('timetracker')">ดูรายละเอียด →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4: ProAccount Website Demo -->
+    <div class="project-card medium reveal reveal-delay-2" data-type="website" style="display:none">
+      <div class="project-preview" style="background:linear-gradient(135deg,#1a2744 0%,#1f2e52 60%,#111c36 100%); display:flex; align-items:center; justify-content:center; height:220px; position:relative;">
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',Georgia,serif; font-size:1.8rem; font-weight:600; color:#c9a84c; letter-spacing:2px;">PRO <span style="color:#f0ebe0; font-weight:400;">ACCOUNT</span></div>
+          <div style="font-size:0.72rem; color:rgba(240,235,224,0.45); letter-spacing:3px; text-transform:uppercase; margin-top:6px;">สำนักงานบัญชีที่ปรึกษา</div>
+        </div>
+        <span class="float-badge tl">Website Demo</span>
+        <span class="float-badge br">HTML + CSS + JS</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta">
+          <span class="project-type">Website · Demo</span>
+          <span class="project-status dev">Demo</span>
+          <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">CSS3</span><span class="project-tag">JavaScript</span></div>
+        </div>
+        <div class="project-title">Pro Account — เว็บสำนักงานบัญชี</div>
+        <div class="project-hook">🏦 Landing Page สไตล์ Navy &amp; Gold — ดูหรูหรา น่าเชื่อถือ</div>
+        <p class="project-desc">Demo Website สำหรับสำนักงานบัญชีที่ปรึกษา ออกแบบสไตล์ Luxury Navy &amp; Gold ครบทุก Section ตั้งแต่ Hero ถึง Contact Form รองรับ Responsive ทุกหน้าจอ</p>
+        <div class="project-footer" style="padding-top:1rem; border-top:none;">
+          <button class="btn-view-detail" onclick="openModal('proaccount')">ดูรายละเอียด →</button>
         </div>
       </div>
     </div>
@@ -835,8 +873,8 @@
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Landing Page ออกแบบตามแบรนด์</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Responsive — มือถือ + คอม</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>ทำตาม Requirement ของลูกค้า</span></div>
+          <div class="pricing-feature"><span class="feature-check">✓</span><span>เว็บโหลดไว พร้อมโครงสร้างรองรับ SEO</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Support 7 วันหลังส่งงาน</span></div>
-          <div class="pricing-feature"><span class="feature-check dim">–</span><span style="color:var(--muted)">ไม่รวม Backend / Database</span></div>
         </div>
         <a href="#contact" class="pricing-cta outline">เริ่มต้นใช้งาน</a>
       </div>
@@ -847,7 +885,7 @@
         <div class="pricing-features">
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Web App พร้อม UI ครบชุด</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Responsive — มือถือ + คอม</span></div>
-          <div class="pricing-feature"><span class="feature-check">✓</span><span>เชื่อมต่อ Google Sheets หรือ Firebase</span></div>
+          <div class="pricing-feature"><span class="feature-check">✓</span><span>ระบบจัดการข้อมูลหลังบ้าน</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>ทำตาม Requirement ของลูกค้า</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>Support 14 วันหลังส่งงาน</span></div>
           <div class="pricing-feature"><span class="feature-check">✓</span><span>ส่งตรงเวลาตามที่ตกลง</span></div>
@@ -879,15 +917,15 @@
     <p class="contact-desc">มีโปรเจกต์ในใจอยู่แล้ว? หรืออยากปรึกษาก่อน?<br>ตอบ inbox ภายใน 24 ชั่วโมง ยินดีช่วยเสมอครับ</p>
     <div class="contact-channels">
       <a href="mailto:eakarthitx@gmail.com" class="contact-channel"><span class="channel-icon">✉️</span><span>eakarthitx@gmail.com</span></a>
-      <a href="https://line.me/ti/p/eakarthit" class="contact-channel"><span class="channel-icon">💬</span><span>LINE: eakarthit</span></a>
+      <a href="https://line.me/ti/p/eakarthit." class="contact-channel"><span class="channel-icon">💬</span><span>LINE: eakarthit.</span></a>
     </div>
-    <a href="mailto:eakarthit@gmail.com" class="btn-primary" style="display:inline-block">ส่งงานให้ผมเลย →</a>
+    <a href="mailto:eakarthit@gmail.com" class="btn-primary" style="display:inline-block">เริ่มปรึกษาโปรเจกต์ของคุณ →</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-copy">© 2025 Aum — Full Stack Developer</div>
+  <div class="footer-copy">© 2026 Aum — Full Stack Developer</div>
   <div class="footer-links">
     <a href="#about">About</a><a href="#skills">Skills</a>
     <a href="#projects">Projects</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a>
@@ -983,8 +1021,7 @@
       tags: ['HTML5', 'Tailwind CSS', 'Firebase', 'Chart.js', 'PWA', 'SheetJS'],
       highlights: ['Real-time sync กับ Firebase', 'Export รายงาน Excel', 'PWA — ใช้ได้แบบ Offline', 'Dashboard วิเคราะห์สต็อค'],
       status: '🔒 Production — ใช้งานจริง',
-      image: 'images/stockflow.jpg',  /* 🖼️ เปลี่ยนชื่อไฟล์ตามต้องการ */
-      isPhone: false,
+      images: ['images/detailstock/1.jpg', 'images/detailstock/2.png', 'images/detailstock/3.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
     },
     'car-booking': {
       type: 'Web App · LINE LIFF',
@@ -993,8 +1030,7 @@
       tags: ['Next.js 16', 'Firebase', 'LINE LIFF', 'LINE Notify', 'TypeScript', 'Tailwind CSS'],
       highlights: ['LINE LIFF — เปิดใน LINE ได้เลย', 'Real-time queue ดูคิวสด', 'LINE Notify แจ้งเตือนทันที', 'Admin Dashboard จัดการรถ'],
       status: '🔒 Production — ใช้งานจริง',
-      image: 'images/car-booking.jpg',  /* 🖼️ เปลี่ยนชื่อไฟล์ตามต้องการ */
-      isPhone: true,
+      images: ['images/car-booking.jpg'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
     },
     'timetracker': {
       type: 'Web App · Enterprise',
@@ -1003,8 +1039,16 @@
       tags: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'PWA', 'QR Code'],
       highlights: ['QR Code Check-in/out', 'ระบบลาออนไลน์ + คำนวณโควตา', 'OT Management + Approval', 'HR Dashboard Real-time'],
       status: '🔒 Production — ใช้งานจริง',
-      image: 'images/timetracker.jpg',  /* 🖼️ เปลี่ยนชื่อไฟล์ตามต้องการ */
-      isPhone: false,
+      images: ['images/detailtimetracker/1.png', 'images/detailtimetracker/2.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
+    },
+    'proaccount': {
+      type: 'Website · Demo',
+      title: 'Pro Account — เว็บสำนักงานบัญชีที่ปรึกษา',
+      desc: 'Demo Landing Page สำหรับสำนักงานบัญชีที่ปรึกษา ออกแบบสไตล์ Luxury Navy & Gold ครบทุก Section ได้แก่ Hero, Services, Why Us, How It Works, Team, Pricing และ Contact Form รองรับ Responsive ทุกขนาดหน้าจอ พร้อม Scroll Animation',
+      tags: ['HTML5', 'CSS3', 'JavaScript', 'Playfair Display', 'Responsive Design', 'Scroll Animation'],
+      highlights: ['Navy & Gold luxury design theme', '7 sections ครบวงจร — Hero ถึง Contact', 'Responsive — มือถือ + คอม', 'Scroll fade-up animation'],
+      status: '🌐 Demo — ตัวอย่างผลงาน',
+      images: ['images/detailaccount/1.png', 'images/detailaccount/2.png', 'images/detailaccount/3.png', 'images/detailaccount/4.png'],  /* 🖼️ ใส่รูป screenshot ได้ภายหลัง */
     }
   };
 
@@ -1019,10 +1063,46 @@
     document.getElementById('modalHighlights').innerHTML = d.highlights.map(h => `<div class="modal-highlight-item"><span class="modal-highlight-dot"></span>${h}</div>`).join('');
 
     const panel = document.getElementById('modalImagePanel');
-    if (d.image) {
-      panel.innerHTML = `<img src="${d.image}" alt="${d.title}" loading="lazy">`;
-    } else {
+    const imgs = d.images && d.images.length ? d.images : [];
+
+    if (imgs.length === 0) {
       panel.innerHTML = `<div class="img-placeholder"><span style="font-size:2.5rem;">🖥️</span><span style="font-family:Inter,sans-serif;font-size:0.8rem;">No Screenshot</span></div>`;
+    } else if (imgs.length === 1) {
+      panel.innerHTML = `<img src="${imgs[0]}" alt="${d.title}" loading="lazy">`;
+    } else {
+      // Multi-image slider
+      let current = 0;
+      const slidesHTML = imgs.map((src, i) =>
+        `<img src="${src}" alt="${d.title} ${i+1}" loading="lazy" class="modal-slide${i===0?' active':''}">`
+      ).join('');
+      const dotsHTML = imgs.map((_, i) =>
+        `<button class="modal-slider-dot${i===0?' active':''}" data-i="${i}"></button>`
+      ).join('');
+
+      panel.innerHTML = `
+        <div class="modal-slider-track">${slidesHTML}</div>
+        <button class="modal-slider-btn modal-slider-prev">‹</button>
+        <button class="modal-slider-btn modal-slider-next">›</button>
+        <div class="modal-slider-dots">${dotsHTML}</div>
+        <span class="modal-img-counter">1 / ${imgs.length}</span>
+      `;
+
+      const slides = panel.querySelectorAll('.modal-slide');
+      const dots = panel.querySelectorAll('.modal-slider-dot');
+      const counter = panel.querySelector('.modal-img-counter');
+
+      function goTo(n) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (n + imgs.length) % imgs.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        counter.textContent = `${current + 1} / ${imgs.length}`;
+      }
+
+      panel.querySelector('.modal-slider-prev').addEventListener('click', () => goTo(current - 1));
+      panel.querySelector('.modal-slider-next').addEventListener('click', () => goTo(current + 1));
+      dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.i)));
     }
 
     document.getElementById('projectModal').classList.add('open');
