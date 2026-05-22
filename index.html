@@ -142,18 +142,7 @@
   .btn-secondary:hover { background: rgba(42,157,143,0.06); transform: translateY(-2px); }
 
   /* HERO VISUAL */
-  .hero-visual { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.2rem; animation: fadeSlideIn 1s 0.3s ease both; }
-  .hero-stat-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
-  .stat-card {
-    background: #fff; border: 1px solid var(--border); padding: 1.8rem 1.5rem;
-    border-radius: 12px; position: relative; overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    transition: box-shadow 0.3s, transform 0.3s;
-  }
-  .stat-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-3px); }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: var(--accent2); line-height: 1; }
-  .stat-num sup { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--accent); vertical-align: super; }
-  .stat-label { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px; font-weight: 500; }
+  .hero-visual { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; animation: fadeSlideIn 1s 0.3s ease both; }
   .code-block {
     background: #fff; border: 1px solid var(--border); border-radius: 12px;
     padding: 1.4rem 1.5rem; font-family: 'JetBrains Mono', 'Courier New', monospace;
@@ -279,6 +268,9 @@
     box-shadow: inset 0 -42px 70px rgba(255,255,255,0.7);
     z-index: 2;
   }
+  .project-preview.is-proaccount::after {
+    display: none;
+  }
   .project-preview-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.4s ease; position: relative; }
   .project-card:hover .project-preview-inner { transform: scale(1.03); }
   .project-body { padding: 1.55rem; display: flex; flex-direction: column; flex: 1; }
@@ -333,49 +325,20 @@
   .metric-label { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
 
 
-  /* ===== IMAGE SLIDER ===== */
-  .project-slider { position: relative; background: linear-gradient(145deg, #edf3f4 0%, #f8fafb 55%, #eef4f2 100%) !important; }
-  .slider-track { width: 100%; height: 100%; position: relative; }
-  .slide {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: contain; object-position: center center;
-    opacity: 0; transition: opacity 0.45s ease;
+  .project-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
     display: block;
   }
-  .project-preview.is-stockflow .slide {
+  .project-preview.is-stockflow img,
+  .project-preview.is-car-booking img,
+  .project-preview.is-proaccount img,
+  .project-preview.is-robux-dashboard img {
     object-fit: cover;
     object-position: top center;
   }
-  .project-preview.is-stockflow .slide:nth-child(n+3) {
-    object-fit: contain;
-    object-position: top center;
-  }
-  .slide.active { opacity: 1; }
-  .slider-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    z-index: 10; width: 32px; height: 32px;
-    background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.1);
-    color: var(--text); font-size: 1.1rem; line-height: 1;
-    border-radius: 50%; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; backdrop-filter: blur(6px);
-    opacity: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  }
-  .project-slider:hover .slider-btn { opacity: 1; }
-  .slider-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .slider-prev { left: 10px; }
-  .slider-next { right: 10px; }
-  .slider-dots {
-    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-    display: flex; gap: 5px; z-index: 10;
-  }
-  .slider-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(0,0,0,0.2); cursor: pointer;
-    transition: all 0.2s; border: none; padding: 0;
-  }
-  .slider-dot.active { background: var(--accent); transform: scale(1.3); }
 
   /* ABOUT */
   #about { padding: 6rem 4rem; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -487,12 +450,24 @@
   .modal-body { display: flex; flex-direction: column; overflow: hidden; flex: 1; min-height: 0; }
   .modal-image-panel { width: 100%; height: 260px; flex-shrink: 0; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface); position: relative; }
   .modal-image-panel img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
-  .modal-image-panel.modal-project-stockflow {
+  .modal-image-panel.modal-project-stockflow,
+  .modal-image-panel.modal-project-timetracker,
+  .modal-image-panel.modal-project-car-booking,
+  .modal-image-panel.modal-project-proaccount,
+  .modal-image-panel.modal-project-robux-dashboard {
     height: clamp(320px, 46vh, 420px);
     background: linear-gradient(145deg, #eef3f5 0%, #f8fafb 100%);
   }
   .modal-image-panel.modal-project-stockflow img,
-  .modal-image-panel.modal-project-stockflow .modal-slide {
+  .modal-image-panel.modal-project-stockflow .modal-slide,
+  .modal-image-panel.modal-project-timetracker img,
+  .modal-image-panel.modal-project-timetracker .modal-slide,
+  .modal-image-panel.modal-project-car-booking img,
+  .modal-image-panel.modal-project-car-booking .modal-slide,
+  .modal-image-panel.modal-project-proaccount img,
+  .modal-image-panel.modal-project-proaccount .modal-slide,
+  .modal-image-panel.modal-project-robux-dashboard img,
+  .modal-image-panel.modal-project-robux-dashboard .modal-slide {
     object-fit: cover;
     object-position: top center;
   }
@@ -540,8 +515,23 @@
     .skills-grid { grid-template-columns: 1fr; }
     #projects { padding: 4rem 1.5rem; }
     .projects-header { grid-template-columns: 1fr; align-items: flex-start; }
-    .filter-tabs { width: 100%; }
-    .filter-tab { flex: 1; min-width: 92px; }
+    .filter-tabs {
+      width: auto;
+      justify-self: end;
+      justify-content: flex-end;
+      gap: 0.18rem;
+      padding: 0.22rem;
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(26,33,48,0.05);
+    }
+    .filter-tab {
+      flex: 0 0 auto;
+      min-width: 72px;
+      min-height: 31px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+    }
     .project-card { grid-column: span 12; }
     .project-card.small { grid-column: span 12; }
     .project-card.medium { grid-column: span 12; }
@@ -551,13 +541,20 @@
 
     /* Mobile: keep cards compact while screenshots remain readable */
     .project-preview { height: 190px !important; }
-    .project-preview.is-stockflow { height: 205px !important; }
+    .project-preview.is-stockflow,
+    .project-preview.is-car-booking,
+    .project-preview.is-proaccount,
+    .project-preview.is-robux-dashboard { height: 205px !important; }
     .project-body { padding: 1.25rem; }
     .project-meta { gap: 0.45rem; margin-bottom: 0.75rem; }
     .project-title { font-size: 1.1rem; margin-bottom: 0.6rem; }
     .project-hook { font-size: 0.8rem; padding: 0.62rem 0.72rem; line-height: 1.55; }
     .project-desc { font-size: 0.9rem; line-height: 1.72; margin-bottom: 0.8rem; }
     .project-preview img { object-position: center center; }
+    .project-preview.is-stockflow img,
+    .project-preview.is-car-booking img,
+    .project-preview.is-proaccount img,
+    .project-preview.is-robux-dashboard img { object-position: top center; }
     .project-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; margin-top: 0.8rem; padding-top: 0.8rem; }
     .metric-item { padding: 0.55rem 0.45rem; }
     .metric-num { font-size: 0.78rem; }
@@ -574,7 +571,11 @@
     .modal-container { border-radius: 16px 16px 0 0; max-height: 92vh; transform: translateY(100%); }
     .modal-overlay.open .modal-container { transform: translateY(0); }
     .modal-image-panel { height: 200px; }
-    .modal-image-panel.modal-project-stockflow { height: 240px; }
+    .modal-image-panel.modal-project-stockflow,
+    .modal-image-panel.modal-project-timetracker,
+    .modal-image-panel.modal-project-car-booking,
+    .modal-image-panel.modal-project-proaccount,
+    .modal-image-panel.modal-project-robux-dashboard { height: 240px; }
   }
 </style>
 </head>
@@ -625,14 +626,6 @@
     </div>
   </div>
   <div class="hero-visual">
-    <div class="hero-stat-cards">
-      <div class="stat-card"><div class="stat-num">8<sup>+</sup></div><div class="stat-label">Projects Done</div></div>
-      <div class="stat-card"><div class="stat-num">1<sup style="color:var(--muted);font-size:0.8rem">yr</sup></div><div class="stat-label">Experience</div></div>
-      <div class="stat-card">
-        <div class="stat-num">100<sup style="font-family:'Inter',sans-serif;font-size:0.75rem;color:var(--accent)">%</sup></div>
-        <div class="stat-label">On-Time</div>
-      </div>
-    </div>
     <div class="code-block">
       <div><span class="line-num">01</span><span class="cm">// tech stack</span></div>
       <div><span class="line-num">02</span><span class="kw">const</span> stack = {</div>
@@ -818,16 +811,8 @@
 
     <!-- PROJECT 1: StockFlow Pro -->
     <div class="project-card reveal" data-type="webapp">
-      <div class="project-preview project-slider is-stockflow" style="background:#0a0f0a;">
-        <div class="slider-track">
-          <img class="slide active" src="images/stockflow-1.jpg" alt="StockFlow Pro screenshot 1">
-          <img class="slide" src="images/stockflow-2.jpg" alt="StockFlow Pro screenshot 2">
-          <img class="slide" src="images/stockflow-3.jpg" alt="StockFlow Pro screenshot 3">
-          <img class="slide" src="images/stockflow-4.jpg" alt="StockFlow Pro screenshot 4">
-        </div>
-        <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
-        <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
-        <div class="slider-dots"></div>
+      <div class="project-preview is-stockflow">
+        <img src="images/detailstock/stockapppwa.web.app_.png" alt="StockFlow Pro dashboard overview">
       </div>
       <div class="project-body">
         <div class="project-meta">
@@ -851,10 +836,8 @@
 
     <!-- PROJECT 2: Car Booking -->
     <div class="project-card small reveal reveal-delay-1" data-type="webapp">
-      <div class="project-preview project-slider" style="background:#0a0f0a;">
-        <div class="slider-track">
-          <img class="slide active" src="images/car-booking-1.png" alt="Car Booking screenshot 1">
-        </div>
+      <div class="project-preview is-car-booking">
+        <img src="images/car-booking.png" alt="Car Booking screenshot">
       </div>
       <div class="project-body">
         <div class="project-meta">
@@ -877,14 +860,8 @@
 
     <!-- PROJECT 3: TimeTracker V2 -->
     <div class="project-card medium reveal reveal-delay-1" data-type="webapp">
-      <div class="project-preview project-slider" style="background:#0a0f0a;">
-        <div class="slider-track">
-          <img class="slide active" src="images/timetracker-1.jpg" alt="TimeTracker screenshot 1">
-          <img class="slide" src="images/timetracker-2.jpg" alt="TimeTracker screenshot 2">
-        </div>
-        <button class="slider-btn slider-prev" aria-label="ก่อนหน้า">&#8249;</button>
-        <button class="slider-btn slider-next" aria-label="ถัดไป">&#8250;</button>
-        <div class="slider-dots"></div>
+      <div class="project-preview">
+        <img src="images/timetracker-1.jpg" alt="TimeTracker dashboard screenshot">
       </div>
       <div class="project-body">
         <div class="project-meta">
@@ -906,41 +883,46 @@
       </div>
     </div>
 
-    <!-- PROJECT 4: ProAccount Website Demo -->
-    <div class="project-card medium reveal reveal-delay-2" data-type="website">
-      <div class="project-preview" style="background:linear-gradient(135deg,#1a2744 0%,#1f2e52 60%,#111c36 100%); display:flex; align-items:center; justify-content:center; position:relative;">
-        <div style="text-align:center;">
-          <div style="font-family:'Playfair Display',Georgia,serif; font-size:1.8rem; font-weight:600; color:#c9a84c; letter-spacing:2px;">PRO <span style="color:#f0ebe0; font-weight:400;">ACCOUNT</span></div>
-          <div style="font-size:0.72rem; color:rgba(240,235,224,0.45); letter-spacing:3px; text-transform:uppercase; margin-top:6px;">สำนักงานบัญชีที่ปรึกษา</div>
-        </div>
+    <!-- PROJECT 4: Robux Dashboard -->
+    <div class="project-card medium reveal reveal-delay-2" data-type="webapp">
+      <div class="project-preview is-robux-dashboard">
+        <img src="images/robux-dashboard.png" alt="Robux Dashboard preview">
       </div>
       <div class="project-body">
         <div class="project-meta">
-          <span class="project-type">Website · Demo</span>
-          <span class="project-status dev">Demo</span>
-          <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">CSS3</span><span class="project-tag">JavaScript</span></div>
+          <span class="project-type">Web App</span>
+          <span class="project-status live">Live</span>
+          <div class="project-tags"><span class="project-tag">Next.js</span><span class="project-tag">TypeScript</span><span class="project-tag">Supabase</span><span class="project-tag">Tailwind</span></div>
         </div>
-        <div class="project-title">Pro Account — เว็บสำนักงานบัญชี</div>
-        <div class="project-hook">🏦 Landing Page สไตล์ Navy &amp; Gold — ดูหรูหรา น่าเชื่อถือ</div>
-        <p class="project-desc">Demo Website สำหรับสำนักงานบัญชีที่ปรึกษา ออกแบบสไตล์ Luxury Navy &amp; Gold ครบทุก Section ตั้งแต่ Hero ถึง Contact Form รองรับ Responsive ทุกหน้าจอ</p>
+        <div class="project-title">Robux Dashboard — ระบบจัดการธุรกิจขาย Robux</div>
+        <div class="project-hook">💡 ระบบร้าน Robux คำนวณกำไร-ขาดทุนอัตโนมัติ — รองรับอัตราแลกเปลี่ยน THB/USDT</div>
+        <p class="project-desc">ระบบ Dashboard ครบวงจรสำหรับธุรกิจซื้อ-ขาย Robux รองรับการบันทึก Wallet, จัดการ Inventory บัญชี Robux, จัดกลุ่มล็อตซื้อ, บันทึกการขาย พร้อมคำนวณกำไรสุทธิและรายงานแบบ Real-time</p>
+        <div class="project-metrics">
+          <div class="metric-item"><div class="metric-num">Multi-Tab</div><div class="metric-label">5 Modules</div></div>
+          <div class="metric-item"><div class="metric-num">Auto Calc</div><div class="metric-label">Profit</div></div>
+          <div class="metric-item"><div class="metric-num">Auth</div><div class="metric-label">Supabase</div></div>
+        </div>
         <div class="project-footer" style="padding-top:1rem; border-top:none;">
-          <button class="btn-view-detail" onclick="openModal('proaccount')">ดูรายละเอียด →</button>
+          <button class="btn-view-detail" onclick="openModal('robux-dashboard')">ดูรายละเอียด →</button>
         </div>
       </div>
     </div>
 
-    <!-- WEBSITE placeholder (coming soon) -->
-    <div class="project-card medium reveal reveal-delay-1" data-type="website">
-      <div class="project-preview" style="background: var(--surface); display:flex; align-items:center; justify-content:center;">
-        <span style="font-size:2.5rem">🚧</span>
+    <!-- PROJECT 4: ProAccount Website Demo -->
+    <div class="project-card medium reveal reveal-delay-2" data-type="website">
+      <div class="project-preview is-proaccount">
+        <img src="images/detailaccount/1.png" alt="Pro Account website screenshot">
       </div>
       <div class="project-body">
-        <div class="project-meta"><span class="project-type">Website</span><span class="project-status dev">Coming Soon</span></div>
-        <div class="project-title">กำลังเตรียมโปรเจกต์</div>
-        <div class="project-hook">🌐 กำลังอัปเดตผลงาน Website ใหม่ — ติดตามได้เร็วๆ นี้</div>
-        <p class="project-desc">หากสนใจสั่งทำ Landing Page หรือ Website สามารถติดต่อได้โดยตรงครับ</p>
+        <div class="project-meta">
+          <span class="project-type">Website</span>
+          <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">CSS3</span><span class="project-tag">JavaScript</span></div>
+        </div>
+        <div class="project-title">Pro Account — เว็บสำนักงานบัญชี</div>
+        <div class="project-hook">🏦 Landing Page สไตล์ Navy &amp; Gold — ดูหรูหรา น่าเชื่อถือ</div>
+        <p class="project-desc">Website สำหรับสำนักงานบัญชีที่ปรึกษา ออกแบบสไตล์ Luxury Navy &amp; Gold ครบทุก Section ตั้งแต่ Hero ถึง Contact Form รองรับ Responsive ทุกหน้าจอ</p>
         <div class="project-footer" style="padding-top:1rem; border-top:none;">
-          <a href="#contact" class="btn-view-detail">ติดต่อสอบถาม →</a>
+          <button class="btn-view-detail" onclick="openModal('proaccount')">ดูรายละเอียด →</button>
         </div>
       </div>
     </div>
@@ -1077,15 +1059,6 @@
       if (preview) { preview.style.height = ''; }
     });
 
-    // Only intervene when exactly 1 card is visible (center it full-width)
-    const visible = [...cards].filter(c => c.style.display !== 'none');
-    if (visible.length === 1 && window.innerWidth > 768) {
-      const c = visible[0];
-      c.style.gridColumn = 'span 12';
-      c.style.flexDirection = 'column';
-      const preview = c.querySelector('.project-preview');
-      if (preview) preview.style.height = '300px';
-    }
   }
 
   // SMOOTH ANCHOR
@@ -1108,7 +1081,7 @@
       tags: ['HTML5', 'Tailwind CSS', 'Firebase', 'Chart.js', 'PWA', 'SheetJS'],
       highlights: ['Real-time sync กับ Firebase', 'Export รายงาน Excel', 'PWA — ใช้ได้แบบ Offline', 'Dashboard วิเคราะห์สต็อค'],
       status: 'Live Project',
-      images: ['images/detailstock/1.jpg', 'images/detailstock/2.png', 'images/detailstock/3.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
+      images: ['images/detailstock/stockapppwa.web.app_.png', 'images/detailstock/2.png', 'images/detailstock/3.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
     },
     'car-booking': {
       type: 'Web App · LINE LIFF',
@@ -1116,8 +1089,8 @@
       desc: 'Web App สำหรับจองรถภายในองค์กร ตรวจสอบคิวและสถานะรถแบบ Real-time พร้อมแจ้งเตือนผ่าน LINE ทันทีที่มีการจอง เปิดใช้งานตรงใน LINE ได้เลยผ่าน LIFF รองรับทุกขนาดหน้าจอ',
       tags: ['Next.js 16', 'Firebase', 'LINE LIFF', 'LINE Notify', 'TypeScript', 'Tailwind CSS'],
       highlights: ['LINE LIFF — เปิดใน LINE ได้เลย', 'Real-time queue ดูคิวสด', 'LINE Notify แจ้งเตือนทันที', 'Admin Dashboard จัดการรถ'],
-      status: '🔒 Production — ใช้งานจริง',
-      images: ['images/car-booking-1.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
+      status: 'Live Project',
+      images: ['images/car-booking.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
     },
     'timetracker': {
       type: 'Web App · Enterprise',
@@ -1125,8 +1098,17 @@
       desc: 'ระบบบริหารจัดการพนักงานแบบครบวงจร รองรับ QR Code Check-in/out, ระบบลาออนไลน์พร้อม Logic คำนวณโควตาอัตโนมัติ, จัดการ OT และ Dashboard รายงานสำหรับ HR แบบ Real-time',
       tags: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'PWA', 'QR Code'],
       highlights: ['QR Code Check-in/out', 'ระบบลาออนไลน์ + คำนวณโควตา', 'OT Management + Approval', 'HR Dashboard Real-time'],
-      status: '🔒 Production — ใช้งานจริง',
-      images: ['images/detailtimetracker/1.png', 'images/detailtimetracker/2.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
+      status: 'Live Project',
+      images: ['images/detailtimetracker/1.png', 'images/detailtimetracker/2.png', 'images/detailtimetracker/3.png', 'images/detailtimetracker/4.png', 'images/detailtimetracker/5.png'],  /* 🖼️ ใส่รูปได้หลายรูป: ['img1.jpg', 'img2.jpg', ...] */
+    },
+    'robux-dashboard': {
+      type: 'Web App · Dashboard',
+      title: 'Robux Dashboard — ระบบจัดการธุรกิจขาย Robux',
+      desc: 'ระบบ Dashboard ครบวงจรสำหรับธุรกิจซื้อ-ขาย Robux (สกุลเงินใน Roblox) รองรับการบันทึก Wallet, จัดการ Inventory บัญชี Robux, จัดกลุ่มล็อตซื้อ (Batches), บันทึกการขาย พร้อมคำนวณกำไรสุทธิอัตโนมัติ และ Dashboard รายงานแบบ Real-time',
+      tags: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS'],
+      highlights: ['Wallet — บันทึกการซื้อ USDT ผ่าน Binance พร้อมคำนวณต้นทุน THB', 'Inventory — จัดการบัญชี Robux พร้อม Status (Available / Sold / Banned)', 'Batches — จัดกลุ่มล็อตซื้อ ติดตามแหล่งที่มาและวันที่ซื้อ', 'Sales — บันทึกการขายรายการ คำนวณกำไรสุทธิต่อ Transaction', 'Overview Dashboard — สรุปยอดขาย, ต้นทุน, กำไร พร้อม Daily Profit Chart'],
+      status: 'Live Project',
+      images: ['images/robux-dashboard.png', 'images/robux-dashboard-1.png'],  /* 🖼️ ใส่รูป screenshot จริงเพิ่มได้ภายหลัง */
     },
     'proaccount': {
       type: 'Website · Demo',
@@ -1134,8 +1116,8 @@
       desc: 'Demo Landing Page สำหรับสำนักงานบัญชีที่ปรึกษา ออกแบบสไตล์ Luxury Navy & Gold ครบทุก Section ได้แก่ Hero, Services, Why Us, How It Works, Team, Pricing และ Contact Form รองรับ Responsive ทุกขนาดหน้าจอ พร้อม Scroll Animation',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Playfair Display', 'Responsive Design', 'Scroll Animation'],
       highlights: ['Navy & Gold luxury design theme', '7 sections ครบวงจร — Hero ถึง Contact', 'Responsive — มือถือ + คอม', 'Scroll fade-up animation'],
-      status: '🌐 Demo — ตัวอย่างผลงาน',
-      images: ['images/detailaccount/1.png', 'images/detailaccount/2.png', 'images/detailaccount/3.png', 'images/detailaccount/4.png'],  /* 🖼️ ใส่รูป screenshot ได้ภายหลัง */
+      status: 'Demo Project',
+      images: ['images/detailaccount/1.png', 'images/detailaccount/2.png', 'images/detailaccount/3.png'],  /* 🖼️ ใส่รูป screenshot ได้ภายหลัง */
     }
   };
 
@@ -1205,63 +1187,6 @@
   document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
   document.getElementById('projectModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-  // ===== IMAGE SLIDER =====
-  function initSliders() {
-    document.querySelectorAll('.project-slider').forEach(slider => {
-      const track = slider.querySelector('.slider-track');
-      if (!track) return;
-
-      // auto-add class="slide" ให้ทุก img ใน track แม้ไม่ได้ใส่ class มา
-      const allImgs = track.querySelectorAll('img');
-      allImgs.forEach((img, i) => {
-        img.classList.add('slide');
-        if (i === 0) img.classList.add('active');
-      });
-
-      const slides = track.querySelectorAll('.slide');
-      const dotsContainer = slider.querySelector('.slider-dots');
-      if (slides.length <= 1) {
-        // รูปเดียว ซ่อนปุ่มและ dots
-        const prev = slider.querySelector('.slider-prev');
-        const next = slider.querySelector('.slider-next');
-        if (prev) prev.style.display = 'none';
-        if (next) next.style.display = 'none';
-        return;
-      }
-
-      let current = 0;
-
-      // build dots
-      dotsContainer.innerHTML = '';
-      slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', e => { e.stopPropagation(); goTo(i); });
-        dotsContainer.appendChild(dot);
-      });
-
-      function goTo(idx) {
-        slides[current].classList.remove('active');
-        dotsContainer.children[current].classList.remove('active');
-        current = (idx + slides.length) % slides.length;
-        slides[current].classList.add('active');
-        dotsContainer.children[current].classList.add('active');
-      }
-
-      const btnPrev = slider.querySelector('.slider-prev');
-      const btnNext = slider.querySelector('.slider-next');
-      if (btnPrev) btnPrev.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
-      if (btnNext) btnNext.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
-    });
-  }
-
-  // รอ DOM โหลดเสร็จก่อน init
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSliders);
-  } else {
-    initSliders();
-  }
 
 </script>
 </body>
